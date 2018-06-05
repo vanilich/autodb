@@ -47,16 +47,25 @@
                     <a href="#"><i class="fa fa-database" aria-hidden="true"></i> База данных<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="/mark">Список марок</a>
-                        </li>
-                        <li>
-                            <a href="morris.html">Список моделей</a>
+                            <a href="#">Автомобили <span class="fa arrow"></span></a>
+                            <ul class="nav nav-third-level">
+                                <li>
+                                    <a href="/cars">Список</a>
+                                </li>
+                                <li>
+                                    <a href="/mark">Марки</a>
+                                </li>
+                                <li>
+                                    <a href="/model">Модели</a>
+                                </li>
+                            </ul>
                         </li>
                         <li>
                             <a href="morris.html">Параметры</a>
                         </li>                        
                     </ul>
-                </li>    
+                </li> 
+
                 <li>
                     <a href="index.html"><i class="fa fa-upload" aria-hidden="true"></i> Импорт</a>
                 </li>   

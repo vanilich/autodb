@@ -19,7 +19,7 @@
                     <div class="col-lg-12">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                Список марок автомобилей
+                                Список моделей автомобиля
                             </div>
 
                             <div class="panel-body">
@@ -29,7 +29,7 @@
                                         <div class="form-group">
                                             <button class="btn btn-default" data-toggle="modal" data-target="#modal-mark-add">
                                                 <i class="fa fa-plus" aria-hidden="true"></i>
-                                                Добавить марку
+                                                Добавить модель
                                             </button> 
                                         </div>
                                     </div>
@@ -45,7 +45,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php foreach($mark as $item) { ?> 
+                                        <?php foreach($model as $item) { ?> 
                                             <tr>
                                                 <td><?php echo $item['id'];?></td>
                                                 <td>
@@ -79,12 +79,12 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title">Добавление марки автомобиля</h4>
+                        <h4 class="modal-title">Добавление модели автомобиля</h4>
                     </div>
                     <div class="modal-body">
                         <form method="POST" action="/mark/add" enctype="multipart/form-data">
                             <div class="form-group">
-                                <label>Название марки автомобиля</label>
+                                <label>Название модели автомобиля</label>
                                 <input type="text" name="name" class="form-control" required>
                             </div>
                             <div class="form-group">
@@ -104,7 +104,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title">Редактирование марки автомобиля</h4>
+                        <h4 class="modal-title">Редактирование модели автомобиля</h4>
                     </div>
                     <div class="modal-body">
                         <form method="POST" action="/mark/add">
