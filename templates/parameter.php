@@ -82,16 +82,29 @@
 
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <div class="form-group">
-                                            <button class="btn btn-default" data-toggle="modal" data-target="#modal-parameter-add">
-                                                <i class="fa fa-plus" aria-hidden="true"></i>
-                                                Добавить параметр
-                                            </button> 
-                                        </div>
+                                        <form class="form-inline">
+                                            <div class="form-group">
+                                                <button class="btn btn-default" data-toggle="modal" data-target="#modal-parameter-add">
+                                                    <i class="fa fa-plus" aria-hidden="true"></i>
+                                                    Добавить параметр
+                                                </button> 
+
+                                            </div>
+                                            <div class="form-group">
+                                                <select class="form-control js-change-category" name="mark_id" required>
+                                                    <option value="0">Все</option> 
+                                                    <?php foreach($parameter_category as $item) { ?>
+                                                        <option value="<?php echo $item['id'];?>"><?php echo $item['name'];?></option>
+                                                    <?php } ?>
+                                                </select>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
 
-                                <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                <br/>
+
+                                <table width="100%" class="table table-striped table-bordered table-hover" id="js-table-category">
                                     <thead>
                                         <tr>
                                             <th>ID</th>
@@ -101,7 +114,7 @@
                                     </thead>
                                     <tbody>
                                         <?php foreach ($parameter as $item) { ?>
-                                            <tr>
+                                            <tr data-category-id="<?php echo $item['category_id']; ?>">
                                                 <td><?php echo $item['id']; ?></td>
                                                 <td><?php echo $item['name']; ?></td>
                                                 <td>
@@ -241,6 +254,24 @@
                     $(this).find('[name="' + key + '"]').val(data[key]);
                 }
             })
+
+            $('.js-change-category').change(function() {
+                var val = $(this).val();
+
+                // Кэшируем
+                var tmp = $('#js-table-category tbody');
+
+                // Если в select выбрано "Все", то показываем все строки таблиц
+                if(val == 0) {
+                    tmp.find('tr').show();
+                    return;
+                }
+
+                // Прячем все строки
+                tmp.find('tr').hide();
+                // Показываем нужные
+                tmp.find('tr[data-category-id="' + val + '"]').show();
+            });
         </script>               
     </body>
 </html>

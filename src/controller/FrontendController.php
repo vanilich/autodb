@@ -69,8 +69,10 @@
 		}	
 
 		public function parameter(Request $request, Response $response, array $args) {
+			$query = "SELECT parameter.id as 'id', parameter.name as 'name', paremeter_category.id as 'category_id' FROM parameter INNER JOIN paremeter_category ON paremeter_category.id = parameter.parameter_category_id";
+
 		    return $this->container->renderer->render($response, 'parameter.php', [
-		    	'parameter' => $this->container->db->getAll('SELECT * FROM parameter'),
+		    	'parameter' => $this->container->db->getAll($query),
 		    	'parameter_category' => $this->container->db->getAll('SELECT * FROM paremeter_category')
 		    ]);				
 		}						
