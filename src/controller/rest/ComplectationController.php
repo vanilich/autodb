@@ -72,6 +72,9 @@
 						// Потом вставляем все параметры в комплектацию
 						$this->container->db->query('INSERT INTO complectation_has_parameter(complectation_id, parameter_id, price) VALUES (?i, ?i, ?i)', $id, $value, 0);
 					}
+				} else {
+					// Если ничего не пришло, то удаляем все!
+					$this->container->db->query('DELETE FROM complectation_has_parameter WHERE complectation_id = ?i', $id);
 				}
 
 				if( $this->container->db->query('UPDATE complectation SET name=?s WHERE id=?i', $name, $id) ) {
