@@ -53,30 +53,6 @@
 				$model_id = intval($body['model_id']);
 				$name = $body['name'];
 
-				// Проверяем, пришли ли параметры от клиента
-				if( isset($body['parameter']) AND !empty($body['parameter']) ) {
-					$category = array_unique($body['parameter']);
-
-					// Узнаем все параметры для данной комплектации
-					$complectationHasParameter = $this->container->db->getAll('SELECT * FROM complectation_has_parameter WHERE complectation_id=?i', $id);
-
-					$tmp = [];
-					foreach ($complectationHasParameter as $value) {
-						$tmp[] = $value['parameter_id'];
-					}
-
-					// Сначала удаляем все параметры из комплектации
-					$this->container->db->query('DELETE FROM complectation_has_parameter WHERE parameter_id IN(?a)', $tmp);
-
-					foreach ($category as $value) {
-						// Потом вставляем все параметры в комплектацию
-						$this->container->db->query('INSERT INTO complectation_has_parameter(complectation_id, parameter_id, price) VALUES (?i, ?i, ?i)', $id, $value, 0);
-					}
-				} else {
-					// Если ничего не пришло, то удаляем все!
-					$this->container->db->query('DELETE FROM complectation_has_parameter WHERE complectation_id = ?i', $id);
-				}
-
 				if( $this->container->db->query('UPDATE complectation SET name=?s WHERE id=?i', $name, $id) ) {
 					$this->container->flash->addMessage('success', 'Комплектация автомобиля была успешно обновлена');
 
