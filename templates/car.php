@@ -282,13 +282,19 @@
                             </div>
 
                             <div class="form-group">
-                                <label>Параметры</label>
+                                <label>Опции <small>(Введите слово для поиска)</small></label>
 
-                                <select class="js-example-basic-multiple form-control" name="states[]" multiple="multiple">
-                                    <?php foreach ($parameter as $item) { ?>
-                                         <option value="<?php echo $item['id']; ?>"><?php echo $item['name']; ?></option>
-                                    <?php } ?>                                    
-                                </select>
+                                <div class="search-wrapper">
+                                    <input type="text" class="form-control js-search">
+
+                                    <ul class="search-container list-unstyled"></ul>
+                                </div>
+                            </div>
+
+                            <div class="js-option">
+                                <table class="table table-bordered search-table">
+                                    <tbody></tbody>
+                                </table>
                             </div>
 
                             <button type="submit" class="btn btn-success">Сохранить</button>
@@ -341,6 +347,14 @@
             </div>
         </div>
 
+        <script type="text/template" id="tpl-remove-parameter">
+            <td style="width: 30px;">
+                <a href="#" class="btn btn-danger btn-sm js-remove-parametr">
+                    <i class="fa fa-trash" aria-hidden="true"></i> 
+                </a>
+            </td>
+        </script>
+
         <?php
             function search($data, $modification_id, $complectation_id) {
                 foreach ($data as $value) {
@@ -379,6 +393,36 @@
                     $(this).find('[name="' + key + '"]').val(data[key]);
                 }
             })
+
+            $('#modal-complectation-edit').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget);
+
+                var id = $(this).find('input[name="id"]').val();
+
+                console.log(id);
+
+                $.ajax({
+                    method: 'POST',
+                    url: '/getParameter/' + id,
+                    beforeSend: function() {
+                        // Скрываем списко с результатами
+                        $('.search-table tbody').html('');
+                    },
+
+                    success: function(data) {
+                        for(var key in data) {
+                            // Создаем элемент таблтицы и добавляем туда название
+                            var tr = $('<tr>').append( $('<td>').text(data[key].name) );
+                            // Добавляем значок удаления параметра (danger)
+                            $(tr).append( $('#tpl-remove-parameter').html() );
+                            // Добавляем скрытый input в tr
+                            $(tr).append( $('<input>').attr('type', 'hidden').attr('name', 'parameter[]').val(data[key].id) );
+                            // Добавляем строку в основную таблицу
+                            $('.search-table tbody').append(tr);                            
+                        }
+                    }
+                })
+            })            
         </script>   
 
         <script type="text/javascript">
@@ -409,7 +453,67 @@
                     }
                 });
             });
-        </script>    
+        </script>   
+
+        <script type="text/javascript">
+            window.search_container = $('.search-container');
+
+            $('.js-search').keyup(function() {
+                var val = $(this).val();
+
+                if(val == "") {
+                    $(window.search_container).hide();
+                    return;
+                }
+
+                $.ajax({
+                    method: 'GET',
+                    url: '/parameter/search',
+                    data: {
+                        search : val
+                    },
+
+                    success: function(data) {
+                        $(window.search_container).html('');
+
+                        for(var key in data) {
+                            var li = $('<li>').attr('data-name', data[key].name).attr('data-id', data[key].id).text(data[key].name);
+
+                            $(window.search_container).append(li);
+                        }
+                    }
+                })
+
+                $(window.search_container).show();
+            });
+
+            // Клик на результат поиска
+            $(document).on('click', '.search-container li', function() {
+                // Скрываем списко с результатами
+                $(window.search_container).hide();
+
+                // Получаем данные 
+                var id = $(this).data('id');
+                var name = $(this).data('name');
+
+                // Создаем элемент таблтицы и добавляем туда название
+                var tr = $('<tr>').append( $('<td>').text(name) );
+                // Добавляем значок удаления параметра (danger)
+                $(tr).append( $('#tpl-remove-parameter').html() );
+                // Добавляем скрытый input в tr
+                $(tr).append( $('<input>').attr('type', 'hidden').attr('name', 'parameter[]').val(id) );
+                // Добавляем строку в основную таблицу
+                $('.search-table tbody').append(tr);
+
+                // Очищаем поле поиска
+                $('.js-search').val('');
+            });
+
+            // Удаление параметры их таблицы
+            $(document).on('click', '.js-remove-parametr', function() {
+                $(this).parents('tr').remove();
+            });
+        </script> 
 
         <style type="text/css">
             .select2-container {

@@ -24,6 +24,8 @@
 	$app->any('/model/remove/{id}', \ModelController::class . ':remove');
 
 	$app->post('/changeModification',   	\ComplectationController::class . ':changeModification');
+	// Получить список параметров по ID комплектации
+	$app->post('/getParameter/{id}', 		\ComplectationController::class . ':getParameter');
 	$app->post('/complectation/add',    	\ComplectationController::class . ':add');
 	$app->post('/complectation/edit',   	\ComplectationController::class . ':edit');
 	$app->any('/complectation/remove/{id}', \ComplectationController::class . ':remove');

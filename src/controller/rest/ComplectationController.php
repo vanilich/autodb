@@ -10,8 +10,6 @@
 		public function changeModification(Request $request, Response $response, array $args) {
 			$body = $request->getParsedBody();
 
-			print_r($body);
-
 			if( isset($body['complectation_id']) AND isset($body['modification_id']) ) {
 				$complectation_id = intval($body['complectation_id']);
 				$modification_id = intval($body['modification_id']);
@@ -55,6 +53,27 @@
 				$model_id = intval($body['model_id']);
 				$name = $body['name'];
 
+				// Проверяем, пришли ли параметры от клиента
+				if( isset($body['parameter']) AND !empty($body['parameter']) ) {
+					$category = array_unique($body['parameter']);
+
+					// Узнаем все параметры для данной комплектации
+					$complectationHasParameter = $this->container->db->getAll('SELECT * FROM complectation_has_parameter WHERE complectation_id=?i', $id);
+
+					$tmp = [];
+					foreach ($complectationHasParameter as $value) {
+						$tmp[] = $value['parameter_id'];
+					}
+
+					// Сначала удаляем все параметры из комплектации
+					$this->container->db->query('DELETE FROM complectation_has_parameter WHERE parameter_id IN(?a)', $tmp);
+
+					foreach ($category as $value) {
+						// Потом вставляем все параметры в комплектацию
+						$this->container->db->query('INSERT INTO complectation_has_parameter(complectation_id, parameter_id, price) VALUES (?i, ?i, ?i)', $id, $value, 0);
+					}
+				}
+
 				if( $this->container->db->query('UPDATE complectation SET name=?s WHERE id=?i', $name, $id) ) {
 					$this->container->flash->addMessage('success', 'Комплектация автомобиля была успешно обновлена');
 
@@ -75,5 +94,15 @@
 					return $response->withRedirect('/cars');
 				}
 			}		    
-		}							
+		}	
+
+		public function getParameter(Request $request, Response $response, array $args) {
+			$id = intval($request->getAttribute('id'));
+
+			$query = 'SELECT * FROM complectation_has_parameter INNER JOIN parameter ON complectation_has_parameter.parameter_id = parameter.id AND complectation_id = ?i';
+
+			$data = $this->container->db->getAll($query, $id);
+		
+			return $response->withJson($data);
+		}						
 	}
