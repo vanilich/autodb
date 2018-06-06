@@ -1,13 +1,13 @@
 <?php
 	$container = $app->getContainer();
 
-	$container['renderer'] = function ($c) {
-	    $settings = $c->get('settings')['renderer'];
-	    return new Slim\Views\PhpRenderer($settings['template_path']);
+	$container['renderer'] = function ($container) {
+	    $settings = $container->get('settings')['renderer'];
+	    return new \MyPhpRenderer($container, $settings['template_path']);
 	};
 
-	$container['logger'] = function ($c) {
-	    $settings = $c->get('settings')['logger'];
+	$container['logger'] = function ($container) {
+	    $settings = $container->get('settings')['logger'];
 	    $logger = new Monolog\Logger($settings['name']);
 	    $logger->pushProcessor(new Monolog\Processor\UidProcessor());
 	    $logger->pushHandler(new Monolog\Handler\StreamHandler($settings['path'], $settings['level']));

@@ -15,6 +15,8 @@
                     </div>
                 </div>
 
+                <?php echo $this->fetch('message.php'); ?>
+
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="panel panel-default">

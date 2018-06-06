@@ -24,7 +24,7 @@
     "autoload-dev": {
         "psr-4": {
             "Tests\\": "tests/",
-            "": ["src/controller/", "src/tasks/", "src/middleware/", "src/model/"]
+            "": ["src/class/", "src/controller/", "src/tasks/", "src/middleware/", "src/model/"]
         }
     },
     "config": {
