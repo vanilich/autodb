@@ -58,7 +58,7 @@
 			$query .= "    AND";
 			$query .= "    modification_id IN (SELECT id FROM modification WHERE model_id=?i)";
 
-		    return $this->container->renderer->render($response, '1model.php', [
+		    return $this->container->renderer->render($response, 'car.php', [
 		    	'model' => $model,
 		    	'car' => $car,
 		    	'parameter' => $this->container->db->getAll('SELECT * FROM parameter'),
