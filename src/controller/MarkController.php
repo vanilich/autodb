@@ -13,10 +13,10 @@
 			if( isset($body['name']) AND !empty($body['name']) ) {
 				$name = $body['name'];
 
-				$this->container->db->query('INSERT INTO mark(name, picture) VALUES(?s, ?s)', $name, $filename);
+				$this->container->db->query('INSERT INTO mark(name) VALUES(?s)', $name);
 			}
 
-		    return $response->withRedirect('/cars');			
+		    return $response->withRedirect('/mark');			
 		}
 
 		/**

@@ -111,5 +111,11 @@
         </div>
 
         <?php echo $this->fetch('scripts.php'); ?>
+
+        <script type="text/javascript">
+$('#myModal').on('shown.bs.modal', function () {
+  $('#myInput').focus()
+})
+        </script>
     </body>
 </html>
