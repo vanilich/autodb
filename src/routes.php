@@ -31,4 +31,5 @@
 	    ]);			
 	});
 
-	$app->post('/mark/add', \MarkController::class . ':add');
+	$app->post('/mark/add',  \MarkController::class . ':add');
+	$app->post('/mark/edit', \MarkController::class . ':edit');

@@ -49,7 +49,10 @@
                                                 <td><?php echo $item['id'];?></td>
                                                 <td><?php echo $item['name'];?></td>
                                                 <td>
-                                                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-mark-edit">
+                                                    <button type="button" class="btn btn-default" 
+                                                    data-toggle="modal" 
+                                                    data-target="#modal-mark-edit" 
+                                                    data-data='<?php echo json_encode($item); ?>'>
                                                         <i class="fa fa-pencil" aria-hidden="true"></i> 
                                                         Редактировать
                                                     </button>
@@ -83,6 +86,7 @@
                                 <label>Название марки автомобиля</label>
                                 <input type="text" name="name" class="form-control" required>
                             </div>
+
                             <button type="submit" class="btn btn-primary">Добавить</button>
                         </form>                
                     </div>
@@ -98,11 +102,14 @@
                         <h4 class="modal-title">Редактирование марки автомобиля</h4>
                     </div>
                     <div class="modal-body">
-                        <form method="POST" action="/mark/add">
+                        <form method="POST" action="/mark/edit">
+                            <input name="id" type="hidden" value="">
+
                             <div class="form-group">
                                 <label>Название марки автомобиля</label>
-                                <input type="text" class="form-control" required>
+                                <input type="text" name="name" class="form-control" required>
                             </div>
+
                             <button type="submit" class="btn btn-success">Сохранить</button>
                         </form>                
                     </div>
@@ -113,9 +120,14 @@
         <?php echo $this->fetch('scripts.php'); ?>
 
         <script type="text/javascript">
-$('#myModal').on('shown.bs.modal', function () {
-  $('#myInput').focus()
-})
+            $('#modal-mark-edit').on('shown.bs.modal', function (event) {
+                var button = $(event.relatedTarget);
+                var data = button.data('data');
+
+                for(var key in data) {
+                    $(this).find('[name="' + key + '"]').val(data[key]);
+                }
+            })
         </script>
     </body>
 </html>

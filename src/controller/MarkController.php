@@ -32,7 +32,7 @@
 				$this->container->db->query('UPDATE mark SET name=?s WHERE id=?i', $name, $id);
 			}
 
-		    return $response->withRedirect('/cars');			
+		    return $response->withRedirect('/mark');			
 		}
 
 		/**
@@ -43,6 +43,6 @@
 
 			$this->container->db->query('DELETE FROM mark WHERE id=?i', $id);
 
-		    return $response->withRedirect('/cars');			
+		    return $response->withRedirect('/mark');			
 		}						
 	}

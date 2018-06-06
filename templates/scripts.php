@@ -9,4 +9,4 @@
 <script src="../vendor/datatables-responsive/dataTables.responsive.js"></script>
 
 <script src="../dist/js/sb-admin-2.js"></script>
-<script src="../dist/js/main.js></script>
+<script src="js/main.js"></script>
