@@ -35,6 +35,7 @@
 
 	$app->get('/parameter/search',    	\ParameterController::class . ':search');
 	$app->post('/parameter/add',    	\ParameterController::class . ':add');
+	$app->post('/parameter/edit',    	\ParameterController::class . ':edit');
 	$app->any('/parameter/remove/{id}', \ParameterController::class . ':remove');
 
 	$app->post('/parameter_category/edit',     	 \ParameterCategoryController::class . ':edit');
