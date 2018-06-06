@@ -60,19 +60,19 @@
                                 </li>
                             </ul>
                         </li>
-                        <li>
+                        <li class="disabled">
                             <a href="morris.html">Параметры</a>
                         </li>                        
                     </ul>
                 </li> 
 
-                <li>
+                <li class="disabled">
                     <a href="index.html"><i class="fa fa-upload" aria-hidden="true"></i> Импорт</a>
                 </li>   
-                <li>
+                <li class="disabled">
                     <a href="index.html"><i class="fa fa-download" aria-hidden="true"></i> Экспорт</a>
                 </li>        
-                <li>
+                <li class="disabled">
                     <a href="index.html"><i class="fa fa-sign-out" aria-hidden="true"></i> Выход</a>
                 </li>                                                       
             </ul>
