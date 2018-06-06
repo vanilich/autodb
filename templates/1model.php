@@ -126,7 +126,7 @@
                                                     </button>
 
                                                     <a href="/complectation/remove/<?php echo $item['id']; ?>?model_id=<?php echo $model['id']; ?>" 
-                                                       class="btn btn-danger" 
+                                                       class="btn btn-danger btn-sm" 
                                                        onclick="return confirm('Вы действительно хотите удалить эту комплектацию автомобиля?')">
                                                         <i class="fa fa-trash" aria-hidden="true"></i> 
                                                     </a>                                                    
@@ -178,7 +178,7 @@
                                                          <i class="fa fa-pencil" aria-hidden="true"></i>
                                                     </button>
                                                     <a href="/modification/remove/<?php echo $item['id']; ?>?model_id=<?php echo $model['id']; ?>" 
-                                                       class="btn btn-danger" 
+                                                       class="btn btn-danger btn-sm" 
                                                        onclick="return confirm('Вы действительно хотите удалить эту модификацию автомобиля?')">
                                                         <i class="fa fa-trash" aria-hidden="true"></i> 
                                                     </a>                                                       
