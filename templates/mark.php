@@ -39,7 +39,6 @@
                                     <thead>
                                         <tr>
                                             <th>ID</th>
-                                            <th>Логотип</th>
                                             <th>Название</th>
                                             <th>Действия</th>
                                         </tr>
@@ -48,9 +47,6 @@
                                         <?php foreach($mark as $item) { ?> 
                                             <tr>
                                                 <td><?php echo $item['id'];?></td>
-                                                <td>
-                                                    <img src="https://cdn.worldvectorlogo.com/logos/skoda-6.svg" width="32" height="32">
-                                                </td>
                                                 <td><?php echo $item['name'];?></td>
                                                 <td>
                                                     <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-mark-edit">
@@ -87,11 +83,6 @@
                                 <label>Название марки автомобиля</label>
                                 <input type="text" name="name" class="form-control" required>
                             </div>
-                            <div class="form-group">
-                                <label>Картинка</label>
-                                <input type="file" name="picture" required>
-                                <p class="help-block">(png, jpg, jpeg)</p>
-                            </div>
                             <button type="submit" class="btn btn-primary">Добавить</button>
                         </form>                
                     </div>
@@ -111,17 +102,6 @@
                             <div class="form-group">
                                 <label>Название марки автомобиля</label>
                                 <input type="text" class="form-control" required>
-                            </div>
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <img src="https://cdn.worldvectorlogo.com/logos/skoda-6.svg" class="img-responsive">
-                                    </div>
-                                </div>
-
-                                <label>Картинка</label>
-                                <input type="file" name="picture" required>
-                                <p class="help-block">(png, jpg, jpeg)</p>
                             </div>
                             <button type="submit" class="btn btn-success">Сохранить</button>
                         </form>                

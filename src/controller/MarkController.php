@@ -10,24 +10,8 @@
 		public function add(Request $request, Response $response, array $args) {
 			$body = $request->getParsedBody();
 
-			if( isset($body['name']) AND !empty($body['name']) AND isset($_FILES['picture']) ) {
+			if( isset($body['name']) AND !empty($body['name']) ) {
 				$name = $body['name'];
-				$picture = $_FILES['picture'];
-
-				$ext = getFileExtension($picture['name']);
-
-				$filename = md5( uniqid() . rand(1, 10000) ) . '.' . $ext;
-				$path = $_SERVER['DOCUMENT_ROOT'] . "/res/" . $filename;
-
-				var_dump($_SERVER['DOCUMENT_ROOT']);
-
-				$a = move_uploaded_file($picture['tmp_name'], $path);
-
-				var_dump($path);
-				var_dump($a);
-
-				var_dump($_FILES['picture']['error']);
-				die();
 
 				$this->container->db->query('INSERT INTO mark(name, picture) VALUES(?s, ?s)', $name, $filename);
 			}
