@@ -113,7 +113,10 @@
 
                 $.ajax({
                     method: 'GET',
-                    url: '/model/' + id,
+                    url: '/model/all',
+                    data: {
+                        mark_id : id
+                    },
 
                     success: function(data) {
                         for(var item in data) {

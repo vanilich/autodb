@@ -11,6 +11,7 @@
 	$app->post('/mark/edit',   		\MarkController::class . ':edit');
 	$app->any('/mark/remove/{id}',  \MarkController::class . ':remove');
 
+	$app->get('/model/all',    		\ModelController::class . ':all');
 	$app->post('/model/add',    	\ModelController::class . ':add');
 	$app->post('/model/edit',    	\ModelController::class . ':edit');
 	$app->any('/model/remove/{id}', \ModelController::class . ':remove');
