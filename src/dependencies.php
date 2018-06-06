@@ -14,7 +14,6 @@
 	    return $logger;
 	};
 
-
 	$container['db'] = function ($container) {
 	    return new SafeMySQL($container->get('settings')['db']);
 	};
