@@ -13,10 +13,12 @@
 			if( isset($body['name']) AND !empty($body['name']) ) {
 				$name = $body['name'];
 
-				$this->container->db->query('INSERT INTO mark(name) VALUES(?s)', $name);
-			}
+				if( $this->container->db->query('INSERT INTO mark(name) VALUES(?s)', $name) ) {
+					$this->container->flash->addMessage('success', 'Марка автомобиля была успешно добавлена');
 
-		    return $response->withRedirect('/mark');			
+					return $response->withRedirect('/mark');	
+				}
+			}
 		}
 
 		/**
@@ -29,12 +31,12 @@
 				$id = intval($body['id']);
 				$name = $body['name'];
 
-				$this->container->db->query('UPDATE mark SET name=?s WHERE id=?i', $name, $id);
+				if( $this->container->db->query('UPDATE mark SET name=?s WHERE id=?i', $name, $id) ) {
+					$this->container->flash->addMessage('success', 'Марка автомобиля была успешно отредактирована');
 
-				$this->container->flash->addMessage('success', 'Марка автомобиля была успешно отредактирована');
+					return $response->withRedirect('/mark');
+				}
 			}
-
-		    return $response->withRedirect('/mark');			
 		}
 
 		/**
@@ -43,10 +45,10 @@
 		public function remove(Request $request, Response $response, array $args) {
 			$id = intval($request->getAttribute('id'));
 
-			$this->container->db->query('DELETE FROM mark WHERE id=?i', $id);
+			if( $this->container->db->query('DELETE FROM mark WHERE id=?i', $id) ) {
+				$this->container->flash->addMessage('success', 'Марка автомобиля была успешно удалена');
 
-			$this->container->flash->addMessage('success', 'Марка автомобиля была успешно удалена');
-
-		    return $response->withRedirect('/mark');			
+		    	return $response->withRedirect('/mark');
+			}			
 		}						
 	}
