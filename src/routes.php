@@ -23,3 +23,4 @@
 	$app->any('/model/remove/{id}', \ModelController::class . ':remove');
 
 	$app->post('/complectation/add',    \ComplectationController::class . ':add');
+	$app->post('/changeModification',   \ComplectationController::class . ':changeModification');

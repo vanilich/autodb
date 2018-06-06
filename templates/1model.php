@@ -15,11 +15,13 @@
                     </div>
                 </div>
 
+                <?php echo $this->fetch('message.php'); ?>
+
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                Редактор комплектаций и модификайи автомобиля
+                                Редактор комплектаций и модификаций автомобиля
                             </div>
 
                             <div class="panel-body">
@@ -33,10 +35,15 @@
                                                     Добавить комплектацию
                                                 </button> 
                                                 
-                                                <button class="btn btn-default">
+                                                <button class="btn btn-default" data-toggle="modal" data-target="#modal-modification-add">
                                                     <i class="fa fa-plus" aria-hidden="true"></i>
                                                     Добавить модификацию
                                                 </button> 
+
+                                                <button class="btn btn-default" data-toggle="modal" data-target="#modal-complectation-bind">
+                                                    <i class="fa fa-th" aria-hidden="true"></i>
+                                                    Привязать комплектацию
+                                                </button>                                                 
                                             </div>
                                         </div>
 
@@ -55,10 +62,10 @@
                                             <tbody>
                                                 <?php $i = 0; ?>
                                                 <?php $currentId = 0; ?>
-                                                <?php while($i < count($complectation)) { ?>
-                                                    <?php if( $currentId !== $complectation[$i]['modification_id'] ) { ?>
+                                                <?php while($i < count($car)) { ?>
+                                                    <?php if( $currentId !== $car[$i]['modification_id'] ) { ?>
                                                         <tr>
-                                                            <td colspan="4"><?php echo $complectation[$i]['modification_name'];?></td>
+                                                            <td colspan="4"><?php echo $car[$i]['modification_name'];?></td>
                                                             <td>
                                                                 <button class="btn btn-primary btn-sm">
                                                                      <i class="fa fa-pencil" aria-hidden="true"></i>
@@ -69,7 +76,7 @@
                                                             </td>                                                    
                                                         </tr> 
                                                         <tr>
-                                                            <td><?php echo $complectation[$i]['complectation_name'];?></td>
+                                                            <td><?php echo $car[$i]['complectation_name'];?></td>
                                                             <td></td>
                                                             <td></td>
                                                             <td></td>
@@ -82,10 +89,10 @@
                                                                 </button>                                                        
                                                             </td>                                                    
                                                         </tr> 
-                                                        <?php $currentId = $complectation[$i]['modification_id']; ?>
+                                                        <?php $currentId = $car[$i]['modification_id']; ?>
                                                     <?php } else { ?>                                                        
                                                         <tr>
-                                                            <td><?php echo $complectation[$i]['complectation_name'];?></td>
+                                                            <td><?php echo $car[$i]['complectation_name'];?></td>
                                                             <td></td>
                                                             <td></td>
                                                             <td></td>
@@ -117,16 +124,16 @@
             </div>
         </div>
 
-        <div class="modal fade" id="modal-complectation-add" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal fade" id="modal-modification-add" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title">Добавить комплектацию для автомобиля <?php echo $model['name']; ?></h4>
+                        <h4 class="modal-title">Добавить модификацию для автомобиля <?php echo $model['name']; ?></h4>
                     </div>
                     <div class="modal-body">
                         <form method="POST" action="/complectation/add" enctype="multipart/form-data">
-                            <input type="hidden" name="id" value="<?php echo 1; ?>">
+                            <input type="hidden" name="model_id" value="<?php echo $model['id']; ?>">
 
                             <div class="form-group">
                                 <label>Название комплектации</label>
@@ -141,6 +148,99 @@
         </div>
 
 
+        <div class="modal fade" id="modal-complectation-add" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Добавить комплектацию для автомобиля <?php echo $model['name']; ?></h4>
+                    </div>
+                    <div class="modal-body">
+                        <form method="POST" action="/complectation/add" enctype="multipart/form-data">
+                            <input type="hidden" name="model_id" value="<?php echo $model['id']; ?>">
+
+                            <div class="form-group">
+                                <label>Название комплектации</label>
+                                <input type="text" name="name" class="form-control" required>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Добавить</button>
+                        </form>                
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="modal-complectation-bind" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Привязать комплектацию для автомобиля <?php echo $model['name']; ?></h4>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table table-bordered">
+                            <tr>
+                                <td></td>
+                                <?php foreach ($modification as $item) { ?>
+                                    <td><?php echo $item['name']; ?></td>
+                                <?php } ?>
+                            </tr>
+                            <?php foreach ($complectation as $complectation_item) { ?>
+                                <tr>
+                                    <td><?php echo $complectation_item['name']; ?></td>
+                                    <?php foreach ($modification as $modification_item) { ?>
+                                        <td>
+                                            <?php $search = search($complectation_has_modification, $modification_item['id'], $complectation_item['id']); ?>
+
+                                            <input 
+                                                class="js-change-complectation_has_modification"
+                                                type="checkbox" 
+                                                <?php if($search) { ?>
+                                                    checked 
+                                                <?php } ?>
+                                                data-complectation-id="<?php echo $complectation_item['id']; ?>"
+                                                data-modification-id="<?php echo $modification_item['id']; ?>"
+                                            >
+                                        </td>
+                                    <?php } ?>
+                                </tr>  
+                            <?php } ?>                          
+                        </table>  
+
+                        <button type="submit" class="btn btn-success" onclick="location.reload();">Сохранить</button>              
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <?php
+            function search($data, $modification_id, $complectation_id) {
+                foreach ($data as $value) {
+                    if($value['complectation_id'] == $complectation_id AND $value['modification_id'] == $modification_id) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+        ?>
+
         <?php echo $this->fetch('scripts.php'); ?>
+
+        <script type="text/javascript">
+            $('.js-change-complectation_has_modification').change(function() {
+                var complectation_id = $(this).data('complectation-id');
+                var modification_id = $(this).data('modification-id');
+
+                $.ajax({
+                    method: 'POST',
+                    url: '/changeModification',
+                    data: {
+                       complectation_id : complectation_id, 
+                       modification_id : modification_id 
+                    }
+                });
+            });
+        </script>
     </body>
 </html>
