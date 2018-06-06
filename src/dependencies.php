@@ -17,3 +17,7 @@
 	$container['db'] = function ($container) {
 	    return new SafeMySQL($container->get('settings')['db']);
 	};
+
+	$container['flash'] = function () {
+	    return new \Slim\Flash\Messages();
+	};	
