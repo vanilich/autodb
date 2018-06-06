@@ -21,7 +21,8 @@
 
 	$app->get('/model', function (Request $request, Response $response, array $args) use($app) {
 	    return $this->renderer->render($response, 'model.php', [
-	    	'model' => $this->db->getAll('SELECT * FROM model')
+	    	'model' => $this->db->getAll('SELECT model.id, model.name, mark.name as `mark_name` FROM model INNER JOIN mark ON mark.id = model.mark_id'),
+	    	'mark' => $this->db->getAll('SELECT * FROM mark')
 	    ]);			
 	});
 
@@ -34,3 +35,7 @@
 	$app->post('/mark/add',    		\MarkController::class . ':add');
 	$app->post('/mark/edit',   		\MarkController::class . ':edit');
 	$app->any('/mark/remove/{id}',  \MarkController::class . ':remove');
+
+	$app->post('/model/add',    	\ModelController::class . ':add');
+	$app->post('/model/edit',    	\ModelController::class . ':edit');
+	$app->any('/model/remove/{id}', \ModelController::class . ':remove');

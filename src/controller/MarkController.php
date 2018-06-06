@@ -32,7 +32,7 @@
 				$name = $body['name'];
 
 				if( $this->container->db->query('UPDATE mark SET name=?s WHERE id=?i', $name, $id) ) {
-					$this->container->flash->addMessage('success', 'Марка автомобиля была успешно отредактирована');
+					$this->container->flash->addMessage('success', 'Марка автомобиля была успешно обновлена');
 
 					return $response->withRedirect('/mark');
 				}

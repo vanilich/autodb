@@ -51,10 +51,11 @@
                                                 <td><?php echo $item['id'];?></td>
                                                 <td><?php echo $item['name'];?></td>
                                                 <td>
-                                                    <button type="button" class="btn btn-default" 
-                                                    data-toggle="modal" 
-                                                    data-target="#modal-mark-edit" 
-                                                    data-data='<?php echo json_encode($item); ?>'>
+                                                    <button type="button" 
+                                                            class="btn btn-default" 
+                                                            data-toggle="modal" 
+                                                            data-target="#modal-mark-edit" 
+                                                            data-data='<?php echo json_encode($item); ?>'>
                                                         <i class="fa fa-pencil" aria-hidden="true"></i> 
                                                         Редактировать
                                                     </button>
