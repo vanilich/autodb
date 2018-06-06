@@ -46,31 +46,13 @@
                                     </div>                                                    
                                 </div>
 
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <button class="btn btn-default">
-                                                <i class="fa fa-plus" aria-hidden="true"></i>
-                                                Добавить марку
-                                            </button> 
-                                            
-                                            <button class="btn btn-default">
-                                                <i class="fa fa-plus" aria-hidden="true"></i>
-                                                Добавить модель
-                                            </button> 
-                                        </div>
-                                    </div>
-                                </div>
-
                                 <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
                                     <thead>
                                         <tr>
                                             <th style="width: 100px;"></th>
                                             <th>ID</th>
-                                            <th>Логотип</th>
                                             <th>Марка</th>
                                             <th>Модель</th>
-                                            <th>Действия</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -83,21 +65,8 @@
                                                     </a>
                                                 </td>
                                                 <td><?php echo $item['id'];?></td>
-                                                <td>
-                                                    <img src="https://cdn.worldvectorlogo.com/logos/skoda-6.svg" width="32" height="32">
-                                                </td>
                                                 <td><?php echo $item['mark_name'];?></td>
                                                 <td><?php echo $item['name'];?></td>
-                                                <td>
-                                                    <button type="button" class="btn btn-default">
-                                                        <i class="fa fa-pencil" aria-hidden="true"></i> 
-                                                        Редактировать
-                                                    </button>
-                                                    <a href="/mark/remove/<?php echo $item['id']; ?>" class="btn btn-danger">
-                                                        <i class="fa fa-trash" aria-hidden="true"></i> 
-                                                        Удалить
-                                                    </a>
-                                                </td>
                                             </tr>
                                         <?php } ?>
                                     </tbody>
