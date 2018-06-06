@@ -35,65 +35,11 @@
                                                 <?php } ?>                                                
                                             </select>
                                         </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div class="form-group">
-                                            <label>Модель</label>
-                                            <select class="form-control js-select-model">
-                                                <option value="0">Любая</option>
-                                            </select>
-                                        </div>
-                                    </div>                                                    
+                                    </div>                                                                                      
                                 </div>
 
-                                <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
-                                    <thead>
-                                        <tr>
-                                            <th style="width: 100px;"></th>
-                                            <th>ID</th>
-                                            <th>Марка</th>
-                                            <th>Модель</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php foreach($data as $item) { ?> 
-                                            <tr>
-                                                <td>
-                                                    <a href="/mark/<?php echo $item['id']; ?>" class="btn btn-primary">
-                                                        <i class="fa fa-check" aria-hidden="true"></i> 
-                                                        Выбрать
-                                                    </a>
-                                                </td>
-                                                <td><?php echo $item['id'];?></td>
-                                                <td><?php echo $item['mark_name'];?></td>
-                                                <td><?php echo $item['name'];?></td>
-                                            </tr>
-                                        <?php } ?>
-                                    </tbody>
-                                </table>
-
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <nav aria-label="Page navigation">
-                                            <ul class="pagination">
-                                                <li>
-                                                    <a href="#" aria-label="Previous">
-                                                        Назад
-                                                    </a>
-                                                </li>
-                                                <li class="disabled"><a href="#">1</a></li>
-                                                <li><a href="#">2</a></li>
-                                                <li><a href="#">3</a></li>
-                                                <li><a href="#">4</a></li>
-                                                <li><a href="#">5</a></li>
-                                                <li>
-                                                    <a href="#" aria-label="Next">
-                                                        Вперед
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </nav>
-                                    </div>
+                                <div class="table-container">
+                                    
                                 </div>
 
                             </div>
@@ -106,31 +52,29 @@
         <?php echo $this->fetch('scripts.php'); ?>
 
         <script type="text/javascript">
+            window.data = {};
+
             $('.js-select-mark').change(function() {
                 var id = $(this).val();
 
-                var str = '<option value="0">Любая</option>';
+                window.data['mark_id'] = id;
+                window.data['page'] = 1;
+                refreshTable();
+            });
 
+            window.refreshTable = function() {
                 $.ajax({
-                    method: 'GET',
-                    url: '/model/all',
-                    data: {
-                        mark_id : id
-                    },
+                    method: 'POST',
+                    url: '/cars/table',
+                    data: window.data,
 
                     success: function(data) {
-                        for(var item in data) {
-                            $('.js-select-model').html('');
-
-                            var id = data[item]['id'];
-                            var name = data[item]['name'];
-
-                            str = str + '<option value="' + id + '">' + name + '</option>';
-                        }
-                        $('.js-select-model').html(str);
-                    }           
+                        $('.table-container').html(data);
+                    }
                 })
-            });
+            }
+
+            window.refreshTable();
         </script>
     </body>
 </html>

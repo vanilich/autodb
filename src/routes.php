@@ -7,6 +7,8 @@
 	$app->get('/model', \FrontendController::class . ':model');
 	$app->get('/mark',  \FrontendController::class . ':mark');
 
+	$app->post('/cars/table',  \CarsController::class . ':table');
+
 	$app->post('/mark/add',    		\MarkController::class . ':add');
 	$app->post('/mark/edit',   		\MarkController::class . ':edit');
 	$app->any('/mark/remove/{id}',  \MarkController::class . ':remove');

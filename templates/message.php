@@ -5,7 +5,7 @@
 <?php foreach ($messages as $key => $value) { ?>
 	<?php $classname = md5(rand(0, 1000) . uniqid()); ?>
 
-	<div class="alert alert-<?php echo $key;?>" role="alert" onshow="alert(123);" id="msg-<?php echo $classname; ?>">
+	<div class="alert alert-<?php echo $key;?>" role="alert" id="msg-<?php echo $classname; ?>">
 	    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
 	        <span aria-hidden="true">&times;</span>
 	    </button> 
