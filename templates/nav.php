@@ -61,7 +61,7 @@
                             </ul>
                         </li>
                         <li>
-                            <a href="morris.html">Параметры</a>
+                            <a href="/parameter">Параметры</a>
                         </li>                        
                     </ul>
                 </li> 
