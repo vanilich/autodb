@@ -60,7 +60,7 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="disabled">
+                        <li>
                             <a href="morris.html">Параметры</a>
                         </li>                        
                     </ul>
