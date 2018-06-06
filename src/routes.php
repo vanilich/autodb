@@ -31,3 +31,5 @@
 	$app->post('/modification/edit',    	\ModificationController::class . ':edit');
 	$app->post('/modification/add',    		\ModificationController::class . ':add');
 	$app->any('/modification/remove/{id}',  \ModificationController::class . ':remove');
+
+	$app->get('/parameter/search',    \ParameterController::class . ':search');

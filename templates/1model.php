@@ -281,6 +281,16 @@
                                 <input type="text" name="name" class="form-control" required>
                             </div>
 
+                            <div class="form-group">
+                                <label>Параметры</label>
+
+                                <select class="js-example-basic-multiple form-control" name="states[]" multiple="multiple">
+                                    <?php foreach ($parameter as $item) { ?>
+                                         <option value="<?php echo $item['id']; ?>"><?php echo $item['name']; ?></option>
+                                    <?php } ?>                                    
+                                </select>
+                            </div>
+
                             <button type="submit" class="btn btn-success">Сохранить</button>
                         </form>                
                     </div>
@@ -369,6 +379,43 @@
                     $(this).find('[name="' + key + '"]').val(data[key]);
                 }
             })
-        </script>       
+        </script>   
+
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('.js-example-basic-multiple').select2();
+
+                $('.js-example-basic-multiple').select2({
+                    ajax: {
+                        url: '/parameter/search',
+                        data: function (params) {
+                            var query = {
+                                search: params.term
+                            }
+                            return query;
+                        },
+                        processResults: function (data) {
+                            console.log(data);
+
+                            return {
+                                results: $.map(data, function (item) {
+                                    return {
+                                        text: item.name,
+                                        id: item.id
+                                    }
+                                })
+                            };
+                        }
+                    }
+                });
+            });
+        </script>    
+
+        <style type="text/css">
+            .select2-container {
+                width: 100% !important;
+                display: block;
+            }
+        </style>
     </body>
 </html>
