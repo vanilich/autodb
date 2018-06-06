@@ -58,7 +58,9 @@
                                                         <i class="fa fa-pencil" aria-hidden="true"></i> 
                                                         Редактировать
                                                     </button>
-                                                    <a href="/mark/remove/<?php echo $item['id']; ?>" class="btn btn-danger">
+                                                    <a href="/mark/remove/<?php echo $item['id']; ?>" 
+                                                       class="btn btn-danger" 
+                                                       onclick="return confirm('Вы действительно хотите удалить эту марку автомобиля?')">
                                                         <i class="fa fa-trash" aria-hidden="true"></i> 
                                                         Удалить
                                                     </a>
@@ -122,7 +124,7 @@
         <?php echo $this->fetch('scripts.php'); ?>
 
         <script type="text/javascript">
-            $('#modal-mark-edit').on('shown.bs.modal', function (event) {
+            $('#modal-mark-edit').on('show.bs.modal', function (event) {
                 var button = $(event.relatedTarget);
                 var data = button.data('data');
 

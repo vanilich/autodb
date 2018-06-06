@@ -22,7 +22,7 @@
 
 			setTimeout(function() {
 				hide( document.getElementById('msg-<?php echo $classname?>') );
-			}, 3000)			
+			}, 5000)			
 		})();
 	</script>
  <?php } ?>

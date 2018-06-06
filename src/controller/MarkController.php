@@ -45,6 +45,8 @@
 
 			$this->container->db->query('DELETE FROM mark WHERE id=?i', $id);
 
+			$this->container->flash->addMessage('success', 'Марка автомобиля была успешно удалена');
+
 		    return $response->withRedirect('/mark');			
 		}						
 	}
