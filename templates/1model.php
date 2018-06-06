@@ -11,7 +11,7 @@
             <div id="page-wrapper">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">База данных</h1>
+                        <h1 class="page-header"><?php echo $model['name']; ?></h1>
                     </div>
                 </div>
 
@@ -19,7 +19,7 @@
                     <div class="col-lg-12">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                Список моделей автомобилей
+                                Редактор комплектаций и модификайи автомобиля
                             </div>
 
                             <div class="panel-body">
@@ -28,7 +28,7 @@
                                     <div class="col-md-8">
                                         <div class="row">
                                             <div class="col-md-12">
-                                                <button class="btn btn-default">
+                                                <button class="btn btn-default" data-toggle="modal" data-target="#modal-complectation-add">
                                                     <i class="fa fa-plus" aria-hidden="true"></i>
                                                     Добавить комплектацию
                                                 </button> 
@@ -53,123 +53,55 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td colspan="4">1.6 МТ5 (109 л.с.)</td>
-                                                    <td>
-                                                        <button class="btn btn-primary btn-sm">
-                                                             <i class="fa fa-pencil" aria-hidden="true"></i>
-                                                        </button>
-                                                        <button class="btn btn-danger btn-sm">
-                                                             <i class="fa fa-trash" aria-hidden="true"></i>
-                                                        </button>                                                        
-                                                    </td>                                                    
-                                                </tr>
-                                                <tr>
-                                                    <td>LS</td>
-                                                    <td>МКПП</td>
-                                                    <td>109 л.с.</td>
-                                                    <td>от 478 000 руб.</td>
-                                                    <td>
-                                                        <button class="btn btn-primary btn-sm">
-                                                             <i class="fa fa-pencil" aria-hidden="true"></i>
-                                                        </button>
-                                                        <button class="btn btn-danger btn-sm">
-                                                             <i class="fa fa-trash" aria-hidden="true"></i>
-                                                        </button>                                                        
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>LS</td>
-                                                    <td>МКПП</td>
-                                                    <td>109 л.с.</td>
-                                                    <td>от 478 000 руб.</td>
-                                                    <td>
-                                                        <button class="btn btn-primary btn-sm">
-                                                             <i class="fa fa-pencil" aria-hidden="true"></i>
-                                                        </button>
-                                                        <button class="btn btn-danger btn-sm">
-                                                             <i class="fa fa-trash" aria-hidden="true"></i>
-                                                        </button>                                                        
-                                                    </td>                                                    
-                                                </tr> 
-                                                <tr>
-                                                    <td colspan="4">1.6 МТ5 (109 л.с.)</td>
-                                                    <td>
-                                                        <button class="btn btn-primary btn-sm">
-                                                             <i class="fa fa-pencil" aria-hidden="true"></i>
-                                                        </button>
-                                                        <button class="btn btn-danger btn-sm">
-                                                             <i class="fa fa-trash" aria-hidden="true"></i>
-                                                        </button>                                                        
-                                                    </td>                                                    
-                                                </tr>
-                                                <tr>
-                                                    <td>LS</td>
-                                                    <td>МКПП</td>
-                                                    <td>109 л.с.</td>
-                                                    <td>от 478 000 руб.</td>
-                                                    <td>
-                                                        <button class="btn btn-primary btn-sm">
-                                                             <i class="fa fa-pencil" aria-hidden="true"></i>
-                                                        </button>
-                                                        <button class="btn btn-danger btn-sm">
-                                                             <i class="fa fa-trash" aria-hidden="true"></i>
-                                                        </button>                                                        
-                                                    </td>                                                    
-                                                </tr>
-                                                <tr>
-                                                    <td>LS</td>
-                                                    <td>МКПП</td>
-                                                    <td>109 л.с.</td>
-                                                    <td>от 478 000 руб.</td>
-                                                    <td>
-                                                        <button class="btn btn-primary btn-sm">
-                                                             <i class="fa fa-pencil" aria-hidden="true"></i>
-                                                        </button>
-                                                        <button class="btn btn-danger btn-sm">
-                                                             <i class="fa fa-trash" aria-hidden="true"></i>
-                                                        </button>                                                        
-                                                    </td>                                                    
-                                                </tr> 
-                                                <tr>
-                                                    <td colspan="4">1.6 МТ5 (109 л.с.)</td>
-                                                    <td>
-                                                        <button class="btn btn-primary btn-sm">
-                                                             <i class="fa fa-pencil" aria-hidden="true"></i>
-                                                        </button>
-                                                        <button class="btn btn-danger btn-sm">
-                                                             <i class="fa fa-trash" aria-hidden="true"></i>
-                                                        </button>                                                        
-                                                    </td>                                                    
-                                                </tr>
-                                                <tr>
-                                                    <td>LS</td>
-                                                    <td>МКПП</td>
-                                                    <td>109 л.с.</td>
-                                                    <td>от 478 000 руб.</td>
-                                                    <td>
-                                                        <button class="btn btn-primary btn-sm">
-                                                             <i class="fa fa-pencil" aria-hidden="true"></i>
-                                                        </button>
-                                                        <button class="btn btn-danger btn-sm">
-                                                             <i class="fa fa-trash" aria-hidden="true"></i>
-                                                        </button>                                                        
-                                                    </td>                                                    
-                                                </tr>
-                                                <tr>
-                                                    <td>LS</td>
-                                                    <td>МКПП</td>
-                                                    <td>109 л.с.</td>
-                                                    <td>от 478 000 руб.</td>
-                                                    <td>
-                                                        <button class="btn btn-primary btn-sm">
-                                                             <i class="fa fa-pencil" aria-hidden="true"></i>
-                                                        </button>
-                                                        <button class="btn btn-danger btn-sm">
-                                                             <i class="fa fa-trash" aria-hidden="true"></i>
-                                                        </button>                                                        
-                                                    </td>                                                    
-                                                </tr>                                                                                                                                               
+                                                <?php $i = 0; ?>
+                                                <?php $currentId = 0; ?>
+                                                <?php while($i < count($complectation)) { ?>
+                                                    <?php if( $currentId !== $complectation[$i]['modification_id'] ) { ?>
+                                                        <tr>
+                                                            <td colspan="4"><?php echo $complectation[$i]['modification_name'];?></td>
+                                                            <td>
+                                                                <button class="btn btn-primary btn-sm">
+                                                                     <i class="fa fa-pencil" aria-hidden="true"></i>
+                                                                </button>
+                                                                <button class="btn btn-danger btn-sm">
+                                                                     <i class="fa fa-trash" aria-hidden="true"></i>
+                                                                </button>                                                        
+                                                            </td>                                                    
+                                                        </tr> 
+                                                        <tr>
+                                                            <td><?php echo $complectation[$i]['complectation_name'];?></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td>
+                                                                <button class="btn btn-primary btn-sm">
+                                                                     <i class="fa fa-pencil" aria-hidden="true"></i>
+                                                                </button>
+                                                                <button class="btn btn-danger btn-sm">
+                                                                     <i class="fa fa-trash" aria-hidden="true"></i>
+                                                                </button>                                                        
+                                                            </td>                                                    
+                                                        </tr> 
+                                                        <?php $currentId = $complectation[$i]['modification_id']; ?>
+                                                    <?php } else { ?>                                                        
+                                                        <tr>
+                                                            <td><?php echo $complectation[$i]['complectation_name'];?></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td>
+                                                                <button class="btn btn-primary btn-sm">
+                                                                     <i class="fa fa-pencil" aria-hidden="true"></i>
+                                                                </button>
+                                                                <button class="btn btn-danger btn-sm">
+                                                                     <i class="fa fa-trash" aria-hidden="true"></i>
+                                                                </button>                                                        
+                                                            </td>                                                    
+                                                        </tr> 
+                                                    <?php } ?>
+
+                                                    <?php $i++; ?>
+                                                <?php } ?>                                                                                           
                                             </tbody>
                                         </table>
                                     </div>                              
@@ -184,6 +116,30 @@
                 </div>                
             </div>
         </div>
+
+        <div class="modal fade" id="modal-complectation-add" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Добавить комплектацию для автомобиля <?php echo $model['name']; ?></h4>
+                    </div>
+                    <div class="modal-body">
+                        <form method="POST" action="/complectation/add" enctype="multipart/form-data">
+                            <input type="hidden" name="id" value="<?php echo 1; ?>">
+
+                            <div class="form-group">
+                                <label>Название комплектации</label>
+                                <input type="text" name="name" class="form-control" required>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Добавить</button>
+                        </form>                
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
         <?php echo $this->fetch('scripts.php'); ?>
     </body>

@@ -7,6 +7,10 @@
 	$app->get('/model', \FrontendController::class . ':model');
 	$app->get('/mark',  \FrontendController::class . ':mark');
 
+	// Информация о автомобиле (комплектации и т.д.)
+	$app->get('/car/{id}',  \FrontendController::class . ':car');
+
+	// Ajax таблица с автомобилями
 	$app->post('/cars/table',  \CarsController::class . ':table');
 
 	$app->post('/mark/add',    		\MarkController::class . ':add');
@@ -17,3 +21,5 @@
 	$app->post('/model/add',    	\ModelController::class . ':add');
 	$app->post('/model/edit',    	\ModelController::class . ':edit');
 	$app->any('/model/remove/{id}', \ModelController::class . ':remove');
+
+	$app->post('/complectation/add',    \ComplectationController::class . ':add');
