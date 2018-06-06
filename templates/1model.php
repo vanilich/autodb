@@ -18,28 +18,18 @@
                 <?php echo $this->fetch('message.php'); ?>
 
                 <div class="row">
-                    <div class="col-lg-12">
+                    <div class="col-lg-6">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                Редактор комплектаций и модификаций автомобиля
+                                Информация о автомобиле
                             </div>
 
                             <div class="panel-body">
 
                                 <div class="row">
-                                    <div class="col-md-8">
+                                    <div class="col-md-12">
                                         <div class="row">
                                             <div class="col-md-12">
-                                                <button class="btn btn-default" data-toggle="modal" data-target="#modal-complectation-add">
-                                                    <i class="fa fa-plus" aria-hidden="true"></i>
-                                                    Добавить комплектацию
-                                                </button> 
-                                                
-                                                <button class="btn btn-default" data-toggle="modal" data-target="#modal-modification-add">
-                                                    <i class="fa fa-plus" aria-hidden="true"></i>
-                                                    Добавить модификацию
-                                                </button> 
-
                                                 <button class="btn btn-default" data-toggle="modal" data-target="#modal-complectation-bind">
                                                     <i class="fa fa-th" aria-hidden="true"></i>
                                                     Привязать комплектацию
@@ -56,7 +46,6 @@
                                                     <th>КПП</th>
                                                     <th>Мощность</th>
                                                     <th>Цена</th>
-                                                    <th>Действия</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -65,29 +54,13 @@
                                                 <?php while($i < count($car)) { ?>
                                                     <?php if( $currentId !== $car[$i]['modification_id'] ) { ?>
                                                         <tr>
-                                                            <td colspan="4"><?php echo $car[$i]['modification_name'];?></td>
-                                                            <td>
-                                                                <button class="btn btn-primary btn-sm">
-                                                                     <i class="fa fa-pencil" aria-hidden="true"></i>
-                                                                </button>
-                                                                <button class="btn btn-danger btn-sm">
-                                                                     <i class="fa fa-trash" aria-hidden="true"></i>
-                                                                </button>                                                        
-                                                            </td>                                                    
+                                                            <td colspan="4"><?php echo $car[$i]['modification_name'];?></td>                                                   
                                                         </tr> 
                                                         <tr>
                                                             <td><?php echo $car[$i]['complectation_name'];?></td>
                                                             <td></td>
                                                             <td></td>
-                                                            <td></td>
-                                                            <td>
-                                                                <button class="btn btn-primary btn-sm">
-                                                                     <i class="fa fa-pencil" aria-hidden="true"></i>
-                                                                </button>
-                                                                <button class="btn btn-danger btn-sm">
-                                                                     <i class="fa fa-trash" aria-hidden="true"></i>
-                                                                </button>                                                        
-                                                            </td>                                                    
+                                                            <td></td>                                                  
                                                         </tr> 
                                                         <?php $currentId = $car[$i]['modification_id']; ?>
                                                     <?php } else { ?>                                                        
@@ -95,15 +68,7 @@
                                                             <td><?php echo $car[$i]['complectation_name'];?></td>
                                                             <td></td>
                                                             <td></td>
-                                                            <td></td>
-                                                            <td>
-                                                                <button class="btn btn-primary btn-sm">
-                                                                     <i class="fa fa-pencil" aria-hidden="true"></i>
-                                                                </button>
-                                                                <button class="btn btn-danger btn-sm">
-                                                                     <i class="fa fa-trash" aria-hidden="true"></i>
-                                                                </button>                                                        
-                                                            </td>                                                    
+                                                            <td></td>                                                   
                                                         </tr> 
                                                     <?php } ?>
 
@@ -120,6 +85,111 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-lg-3">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                Список комплектаций
+                            </div>
+
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <button class="btn btn-default" data-toggle="modal" data-target="#modal-complectation-add">
+                                            <i class="fa fa-plus" aria-hidden="true"></i>
+                                            Добавить комплектацию
+                                        </button>                                                 
+                                    </div>
+                                </div>
+
+                                <br/>
+
+                                <table width="100%" class="table table-bordered table-hover" id="dataTables-example">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Название</th>
+                                            <th>Действия</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach ($complectation as $item) { ?>
+                                            <tr>
+                                                <td><?php echo $item['id']; ?></td>
+                                                <td><?php echo $item['name']; ?></td>
+                                                <td>
+                                                    <button 
+                                                    class="btn btn-primary btn-sm" 
+                                                    data-toggle="modal" 
+                                                    data-target="#modal-complectation-edit" 
+                                                    data-data='<?php echo json_encode($item); ?>'>
+                                                         <i class="fa fa-pencil" aria-hidden="true"></i>
+                                                    </button>
+
+                                                    <a href="/complectation/remove/<?php echo $item['id']; ?>?model_id=<?php echo $model['id']; ?>" 
+                                                       class="btn btn-danger" 
+                                                       onclick="return confirm('Вы действительно хотите удалить эту комплектацию автомобиля?')">
+                                                        <i class="fa fa-trash" aria-hidden="true"></i> 
+                                                    </a>                                                    
+                                                </td>  
+                                            </tr>
+                                        <?php } ?> 
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>                    
+                    <div class="col-lg-3">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                Список модификаций
+                            </div>
+
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <button class="btn btn-default" data-toggle="modal" data-target="#modal-modification-add">
+                                            <i class="fa fa-plus" aria-hidden="true"></i>
+                                            Добавить модификацию
+                                        </button>                                                 
+                                    </div>
+                                </div>
+
+                                <br/>
+
+                                <table width="100%" class="table table-bordered table-hover" id="dataTables-example">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Название</th>
+                                            <th>Действия</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach ($modification as $item) { ?>
+                                            <tr>
+                                                <td><?php echo $item['id']; ?></td>
+                                                <td><?php echo $item['name']; ?></td>
+                                                <td>
+                                                    <button 
+                                                    class="btn btn-primary btn-sm" 
+                                                    data-toggle="modal" 
+                                                    data-target="#modal-modification-edit" 
+                                                    data-data='<?php echo json_encode($item); ?>'>
+                                                         <i class="fa fa-pencil" aria-hidden="true"></i>
+                                                    </button>
+                                                    <a href="/modification/remove/<?php echo $item['id']; ?>?model_id=<?php echo $model['id']; ?>" 
+                                                       class="btn btn-danger" 
+                                                       onclick="return confirm('Вы действительно хотите удалить эту модификацию автомобиля?')">
+                                                        <i class="fa fa-trash" aria-hidden="true"></i> 
+                                                    </a>                                                       
+                                                </td> 
+                                            </tr>
+                                        <?php } ?>                                    
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>                
             </div>
         </div>
@@ -132,11 +202,11 @@
                         <h4 class="modal-title">Добавить модификацию для автомобиля <?php echo $model['name']; ?></h4>
                     </div>
                     <div class="modal-body">
-                        <form method="POST" action="/complectation/add" enctype="multipart/form-data">
+                        <form method="POST" action="/modification/add" enctype="multipart/form-data">
                             <input type="hidden" name="model_id" value="<?php echo $model['id']; ?>">
 
                             <div class="form-group">
-                                <label>Название комплектации</label>
+                                <label>Название модификации</label>
                                 <input type="text" name="name" class="form-control" required>
                             </div>
 
@@ -147,6 +217,29 @@
             </div>
         </div>
 
+        <div class="modal fade" id="modal-modification-edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Редактировать модификацию для автомобиля <?php echo $model['name']; ?></h4>
+                    </div>
+                    <div class="modal-body">
+                        <form method="POST" action="/modification/edit">
+                            <input name="id" type="hidden" value="">
+                            <input type="hidden" name="model_id" value="<?php echo $model['id']; ?>">
+
+                            <div class="form-group">
+                                <label>Название модификации автомобиля</label>
+                                <input type="text" name="name" class="form-control" required>
+                            </div>
+
+                            <button type="submit" class="btn btn-success">Сохранить</button>
+                        </form>                
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <div class="modal fade" id="modal-complectation-add" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
@@ -170,6 +263,30 @@
                 </div>
             </div>
         </div>
+
+        <div class="modal fade" id="modal-complectation-edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Редактировать комплектацию для автомобиля <?php echo $model['name']; ?></h4>
+                    </div>
+                    <div class="modal-body">
+                        <form method="POST" action="/complectation/edit">
+                            <input name="id" type="hidden" value="">
+                            <input type="hidden" name="model_id" value="<?php echo $model['id']; ?>">
+
+                            <div class="form-group">
+                                <label>Название комплектации автомобиля</label>
+                                <input type="text" name="name" class="form-control" required>
+                            </div>
+
+                            <button type="submit" class="btn btn-success">Сохранить</button>
+                        </form>                
+                    </div>
+                </div>
+            </div>
+        </div>        
 
         <div class="modal fade" id="modal-complectation-bind" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog modal-lg" role="document">
@@ -242,5 +359,16 @@
                 });
             });
         </script>
+
+        <script type="text/javascript">
+            $('#modal-modification-edit, #modal-complectation-edit').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget);
+                var data = button.data('data');
+
+                for(var key in data) {
+                    $(this).find('[name="' + key + '"]').val(data[key]);
+                }
+            })
+        </script>       
     </body>
 </html>

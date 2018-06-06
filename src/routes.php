@@ -22,5 +22,12 @@
 	$app->post('/model/edit',    	\ModelController::class . ':edit');
 	$app->any('/model/remove/{id}', \ModelController::class . ':remove');
 
-	$app->post('/complectation/add',    \ComplectationController::class . ':add');
-	$app->post('/changeModification',   \ComplectationController::class . ':changeModification');
+	$app->post('/changeModification',   	\ComplectationController::class . ':changeModification');
+	$app->post('/complectation/add',    	\ComplectationController::class . ':add');
+	$app->post('/complectation/edit',   	\ComplectationController::class . ':edit');
+	$app->any('/complectation/remove/{id}', \ComplectationController::class . ':remove');
+	
+
+	$app->post('/modification/edit',    	\ModificationController::class . ':edit');
+	$app->post('/modification/add',    		\ModificationController::class . ':add');
+	$app->any('/modification/remove/{id}',  \ModificationController::class . ':remove');
