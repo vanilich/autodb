@@ -234,6 +234,170 @@
                                 <input type="text" name="name" class="form-control" required>
                             </div>
 
+                            <div class="form-group">
+                                <label>Длина, мм</label>
+                                <input type="number" name="length" class="form-control" >
+                            </div>
+
+                            <div class="form-group">
+                                <label>Ширина, мм</label>
+                                <input type="number" name="width" class="form-control" >
+                            </div>
+
+                            <div class="form-group">
+                                <label>Высота, мм</label>
+                                <input type="number" name="height" class="form-control" >
+                            </div>
+
+                            <div class="form-group">
+                                <label>Колесная база, мм</label>
+                                <input type="number" name="wheel_base" class="form-control" >
+                            </div>
+
+                            <div class="form-group">
+                                <label>Передняя колея колес, мм</label>
+                                <input type="number" name="front_rut" class="form-control" >
+                            </div>
+
+                            <div class="form-group">
+                                <label>Задняя колея колес, мм</label>
+                                <input type="number" name="back_rut" class="form-control" >
+                            </div>
+
+                            <div class="form-group">
+                                <label>Передний свес, мм</label>
+                                <input type="number" name="front_overhang" class="form-control" >
+                            </div>                                                                                                                
+
+                            <div class="form-group">
+                                <label>Задний свес, мм</label>
+                                <input type="number" name="back_overhang" class="form-control" >
+                            </div> 
+
+                            <div class="form-group">
+                                <label>Минимальный объем багажного отделения, л</label>
+                                <input type="number" name="trunk_volume_min" class="form-control" >
+                            </div> 
+
+                            <div class="form-group">
+                                <label>Максимальный объем багажного отделения, л</label>
+                                <input type="number" name="trunk_volume_max" class="form-control" >
+                            </div> 
+
+                            <div class="form-group">
+                                <label>Объем топливного бака, л</label>
+                                <input type="number" name="tank_volume" class="form-control" >
+                            </div> 
+
+                            <div class="form-group">
+                                <label>Передние тормоза (тип, размер)</label>
+                                <input type="text" name="front_brakes" class="form-control" >
+                            </div> 
+
+                            <div class="form-group">
+                                <label>Задние тормоза (тип, размер)</label>
+                                <input type="text" name="back_brakes" class="form-control" >
+                            </div> 
+
+                            <div class="form-group">
+                                <label>Передняя подвеска</label>
+                                <input type="text" name="front_suspension" class="form-control" >
+                            </div> 
+
+                            <div class="form-group">
+                                <label>Задняя подвеска</label>
+                                <input type="text" name="back_suspension" class="form-control" >
+                            </div> 
+
+                            <div class="form-group">
+                                <label>Объем двигателя, л</label>
+                                <input type="number" step="any" name="engine_displacement" class="form-control" >
+                            </div> 
+
+                            <div class="form-group">
+                                <label>Рабочий объем двигателя, см3</label>
+                                <input type="number" name="engine_displacement_working_value" class="form-control" >
+                            </div> 
+
+                            <div class="form-group">
+                                <label>Тип двигателя</label>
+                                <input type="text" name="engine_type" class="form-control" >
+                            </div> 
+
+                            <div class="form-group">
+                                <label>Коробка передач</label>
+                                <select class="form-control" name="gearbox">
+                                    <option selected="true" disabled="disabled"></option> 
+                                    <option value="Механическая">Механическая</option>
+                                    <option value="Автоматическая">Автоматическая</option>
+                                </select>
+                            </div> 
+
+                            <div class="form-group">
+                                <label>Количество передач</label>
+                                <input type="text" name="gears" class="form-control" >
+                            </div> 
+
+                            <div class="form-group">
+                                <label>Тип привода</label>
+                                <select class="form-control" name="drive">
+                                    <option selected="true" disabled="disabled"></option> 
+                                    <option value="Передний">Передний</option>
+                                    <option value="Задний">Задний</option>
+                                    <option value="Полный">Полный</option>
+                                </select>                                
+                            </div> 
+
+                            <div class="form-group">
+                                <label>Мощность, л.с.</label>
+                                <input type="number" name="power" class="form-control" >
+                            </div> 
+
+                            <div class="form-group">
+                                <label>Расход топлива в городе, л/100 км</label>
+                                <input type="number" step="any" name="consume_city" class="form-control" >
+                            </div> 
+
+                            <div class="form-group">
+                                <label>Расход топлива на трассе, л/100 км</label>
+                                <input ttype="number" step="any" name="consume_track" class="form-control" >
+                            </div> 
+
+                            <div class="form-group">
+                                <label>Смешанный расход топлива, л/100 км</label>
+                                <input type="number" step="any" name="consume_mixed" class="form-control" >
+                            </div> 
+
+                            <div class="form-group">
+                                <label>Разгон от 0 до 100 км/ч, сек.</label>
+                                <input type="number" step="any" name="acceleration_100km" class="form-control" >
+                            </div> 
+
+                            <div class="form-group">
+                                <label>Максимальная скорость, км/ч</label>
+                                <input type="number" name="max_speed" class="form-control" >
+                            </div> 
+
+                            <div class="form-group">
+                                <label>Дорожный просвет, мм</label>
+                                <input type="number" name="clearance" class="form-control" >
+                            </div> 
+
+                            <div class="form-group">
+                                <label>Минимальная масса, кг</label>
+                                <input type="number" name="min_mass" class="form-control" >
+                            </div> 
+
+                            <div class="form-group">
+                                <label>Максимальная масса, кг</label>
+                                <input type="number" name="max_mass" class="form-control" >
+                            </div> 
+
+                            <div class="form-group">
+                                <label>Допустимая масса прицепа без тормозов, кг</label>
+                                <input type="number" name="trailer_mass" class="form-control" >
+                            </div>
+
                             <button type="submit" class="btn btn-success">Сохранить</button>
                         </form>                
                     </div>

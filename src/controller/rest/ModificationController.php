@@ -27,6 +27,10 @@
 				$model_id = intval($body['model_id']);
 				$name = $body['name'];
 
+				print_r($body);
+
+				die();
+
 				if( $this->container->db->query('UPDATE modification SET name=?s WHERE id=?i', $name, $id) ) {
 					$this->container->flash->addMessage('success', 'Модификация автомобиля была успешно обновлена');
 
