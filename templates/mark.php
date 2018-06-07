@@ -42,7 +42,7 @@
                                         <tr>
                                             <th>ID</th>
                                             <th>Название</th>
-                                            <th>Действия</th>
+                                             <th style="width: 100px;">Действия</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -52,18 +52,16 @@
                                                 <td><?php echo $item['name'];?></td>
                                                 <td>
                                                     <button type="button" 
-                                                            class="btn btn-default" 
+                                                            class="btn btn-primary btn-sm" 
                                                             data-toggle="modal" 
                                                             data-target="#modal-mark-edit" 
                                                             data-data='<?php echo json_encode($item); ?>'>
                                                         <i class="fa fa-pencil" aria-hidden="true"></i> 
-                                                        Редактировать
                                                     </button>
                                                     <a href="/mark/remove/<?php echo $item['id']; ?>" 
-                                                       class="btn btn-danger" 
+                                                       class="btn btn-danger btn-sm" 
                                                        onclick="return confirm('Вы действительно хотите удалить эту марку автомобиля?')">
                                                         <i class="fa fa-trash" aria-hidden="true"></i> 
-                                                        Удалить
                                                     </a>
                                                 </td>
                                             </tr>
