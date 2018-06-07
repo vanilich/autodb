@@ -40,6 +40,8 @@
 			$query .= "SELECT "; 
 			$query .= "	   complectation_has_modification.id as 'id', ";
 			$query .= "    modification.id as 'modification_id',";
+			$query .= "    modification.gearbox as 'modification_gearbox',";
+			$query .= "    modification.power as 'modification_power',";
 			$query .= "    complectation.id as 'complectation_id', ";
 			$query .= "    modification.name as 'modification_name', ";
 			$query .= "    complectation.name as 'complectation_name' ";

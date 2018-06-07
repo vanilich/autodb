@@ -58,16 +58,16 @@
                                                         </tr> 
                                                         <tr>
                                                             <td><?php echo $car[$i]['complectation_name'];?></td>
-                                                            <td></td>
-                                                            <td></td>
+                                                            <td><?php echo $car[$i]['modification_gearbox'];?></td>
+                                                            <td><?php echo $car[$i]['modification_power'];?></td>
                                                             <td></td>                                                  
                                                         </tr> 
                                                         <?php $currentId = $car[$i]['modification_id']; ?>
                                                     <?php } else { ?>                                                        
                                                         <tr>
                                                             <td><?php echo $car[$i]['complectation_name'];?></td>
-                                                            <td></td>
-                                                            <td></td>
+                                                            <td><?php echo $car[$i]['modification_gearbox'];?></td>
+                                                            <td><?php echo $car[$i]['modification_power'];?></td>
                                                             <td></td>                                                   
                                                         </tr> 
                                                     <?php } ?>
