@@ -32,7 +32,7 @@
                                             <div class="col-md-12">
                                                 <button class="btn btn-default" data-toggle="modal" data-target="#modal-complectation-bind">
                                                     <i class="fa fa-th" aria-hidden="true"></i>
-                                                    Привязать комплектацию
+                                                    Привязать комплектацию и назначить цены
                                                 </button>                                                 
                                             </div>
                                         </div>
@@ -506,11 +506,17 @@
                                                 >
 
                                                 <form class="form-inline">
-                                                    <div class="form-group">
-                                                        <input type="text" class="form-control" id="exampleInputName2" placeholder="Цена">
+                                                    <input type="hidden" name="id" value="<?php echo $search['id']; ?>">
+
+                                                    <div class="form-group text-left">
+                                                        <label>Цена:</label>
+                                                        <br/>
+                                                        <input type="number" class="form-control" name="price" placeholder="Цена" value="<?php echo $search['price']; ?>" <?php if(!$search) { echo "disabled";} ?>>
                                                     </div>
-                                                    <div class="form-group">
-                                                        <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Старая цена">
+                                                    <div class="form-group text-left">
+                                                        <label>Старая цена:</label>
+                                                        <br/>
+                                                        <input type="number" class="form-control" name="old_price" placeholder="Старая цена" value="<?php echo $search['old_price']; ?>" <?php if(!$search) { echo "disabled";} ?>>
                                                     </div>
                                                 </form> 
                                             </div>                                           
@@ -520,7 +526,7 @@
                             <?php } ?>                          
                         </table>  
 
-                        <button type="submit" class="btn btn-success" onclick="location.reload();">Сохранить</button>              
+                        <button type="submit" class="btn btn-success js-save">Сохранить</button>              
                     </div>
                 </div>
             </div>
@@ -538,7 +544,7 @@
             function search($data, $modification_id, $complectation_id) {
                 foreach ($data as $value) {
                     if($value['complectation_id'] == $complectation_id AND $value['modification_id'] == $modification_id) {
-                        return true;
+                        return $value;
                     }
                 }
                 return false;
@@ -560,6 +566,49 @@
                        modification_id : modification_id 
                     }
                 });
+
+                // Очищаем цену и страую цену в этой ячейке таблицы
+                if( $(this).is(':checked') === false ) {
+                    $(this).parents('.js-change-modification').find('input[type="number"]').val('').attr('disabled', true);
+                } else {
+                    $(this).parents('.js-change-modification').find('input[type="number"]').val(0).attr('disabled', false);
+                }
+            });
+
+            // Щелчок на кнопке сохранить привязку комплектации к модификации
+            $('#modal-complectation-bind .js-save').click(function() {
+                //location.reload();
+
+                data = [];    
+                // Проходимся по ячейкам таблицы и получаем данные цены
+                $('#modal-complectation-bind .js-change-modification').each(function() {
+                    var form = $(this).find('form');
+
+                    if( $(this).find('input[type="checkbox"]').is(':checked') ) {
+                        var form = $(this).find('form');
+
+                        var id = form.find('input[name="id"]').val();
+                        var price = form.find('input[name="price"]').val();
+                        var old_price = form.find('input[name="old_price"]').val();
+
+                        data.push({
+                            id: id,
+                            price: price,
+                            old_price: old_price
+                        });
+                    }
+                });
+
+                $.ajax({
+                    method: 'POST',
+                    url: '/setPrice',
+                    data: {
+                        data: data
+                    },
+                    success: function() {
+                        location.reload();
+                    }
+                })
             });
         </script>
 

@@ -27,6 +27,25 @@
 
 		}	
 
+		/**
+		* Устанавливаем цену для соотвествующей комплектации и модификации
+		**/
+		public function setPrice(Request $request, Response $response, array $args) {
+			$body = $request->getParsedBody();
+
+			if( isset($body['data']) AND !empty($body['data']) ) {
+				foreach ($body['data'] as $value) {
+					$id = intval($value['id']);
+					$price = intval($value['price']);
+					$old_price = intval($value['old_price']);
+
+					$this->container->db->query('UPDATE complectation_has_modification SET price=?i, old_price=?i WHERE id=?i', $price, $old_price, $id);
+				}
+
+				$this->container->flash->addMessage('success', 'Комплектация была успешно обновлена');
+			}
+		}
+
 		public function add(Request $request, Response $response, array $args) {
 			$body = $request->getParsedBody();
 
