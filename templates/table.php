@@ -14,7 +14,7 @@
     <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
         <thead>
             <tr>
-                <th style="width: 100px;"></th>
+                <th style="width: 90px;"></th>
                 <th>ID</th>
                 <th>Марка</th>
                 <th>Модель</th>
@@ -24,10 +24,12 @@
             <?php foreach($data as $item) { ?> 
                 <tr>
                     <td>
-                        <a href="/car/<?php echo $item['id']; ?>" class="btn btn-primary">
+                        <a href="/car/<?php echo $item['id']; ?>" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="bottom" title="Редактировать комплектации">
                             <i class="fa fa-check" aria-hidden="true"></i> 
-                            Выбрать
                         </a>
+                        <a href="/car/<?php echo $item['id']; ?>" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="bottom" title="Цвет автомобиля">
+                            <i class="fa fa-picture-o" aria-hidden="true"></i>
+                        </a>                        
                     </td>
                     <td><?php echo $item['id'];?></td>
                     <td><?php echo $item['mark_name'];?></td>
@@ -86,4 +88,7 @@
             </div>
         </div>
     <?php } ?>
+    <script type="text/javascript">
+        $('[data-toggle="tooltip"]').tooltip();
+    </script>
 <?php } ?>
