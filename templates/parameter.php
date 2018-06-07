@@ -82,7 +82,7 @@
 
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <form class="form-inline">
+                                        <div class="form-inline">
                                             <div class="form-group">
                                                 <button class="btn btn-default" data-toggle="modal" data-target="#modal-parameter-add">
                                                     <i class="fa fa-plus" aria-hidden="true"></i>
@@ -98,7 +98,7 @@
                                                     <?php } ?>
                                                 </select>
                                             </div>
-                                        </form>
+                                        </div>
                                     </div>
                                 </div>
 
