@@ -23,19 +23,34 @@
 			$body = $request->getParsedBody();
 
 			if( isset($body['name']) AND !empty($body['name']) AND isset($body['id']) AND !empty($body['id']) AND isset($body['model_id']) AND !empty($body['model_id']) ) {
-				$id = intval($body['id']);
+				$id = intval($body['id']); 
 				$model_id = intval($body['model_id']);
-				$name = $body['name'];
 
-				print_r($body);
+				$whiteList = [
+					"name", "length", "width", "height", "wheel_base", "front_rut", "back_rut", "front_overhang", "back_overhang", 
+					"trunk_volume_min", "trunk_volume_max", "tank_volume", "front_brakes", "back_brakes", "front_suspension", 
+					"back_suspension", "engine_displacement", "engine_displacement_working_value", "engine_type", "gearbox", 
+					"gears", "drive", "power", "consume_city", "consume_track", "consume_mixed", "acceleration_100km", 
+					"max_speed", "clearance", "min_mass", "max_mass", "trailer_mass"
+				];
 
-				die();
+				$insertData = [];
 
-				if( $this->container->db->query('UPDATE modification SET name=?s WHERE id=?i', $name, $id) ) {
-					$this->container->flash->addMessage('success', 'Модификация автомобиля была успешно обновлена');
+				// Сверяем переданные параметры с белым списком
+				// Если такой параметр есть в белом списке и он не пустой, то вставляем его в бд
+				foreach ($whiteList as $value) {
+					if( isset($body[$value]) AND !empty($body[$value]) ) {
+						$insertData[$value] = $body[$value];
+					}
+				}
 
-		    		return $response->withRedirect('/car/' . $model_id);
-				} 
+				if( !empty($insertData) ) {
+					if( $this->container->db->query('UPDATE modification SET ?u WHERE id=?i', $insertData, $id) ) {
+						$this->container->flash->addMessage('success', 'Модификация автомобиля была успешно обновлена');
+
+			    		return $response->withRedirect('/car/' . $model_id);
+					} 									
+				}
 			}
 		}	
 
