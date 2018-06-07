@@ -46,6 +46,7 @@
                                                     <th>КПП</th>
                                                     <th>Мощность</th>
                                                     <th>Цена</th>
+                                                    <th>Старая цена</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -54,15 +55,18 @@
                                                 <?php while($i < count($car)) { ?>
                                                     <?php if( $currentId !== $car[$i]['modification_id'] ) { ?>
                                                         <tr>
-                                                            <td colspan="4"><?php echo $car[$i]['modification_name'];?></td>                                                   
+                                                            <td colspan="5"><?php echo $car[$i]['modification_name'];?></td>                                                   
                                                         </tr> 
                                                         <tr>
                                                             <td><?php echo $car[$i]['complectation_name'];?></td>
                                                             <td><?php echo $car[$i]['modification_gearbox'];?></td>
                                                             <td><?php echo $car[$i]['modification_power'];?></td>
                                                             <td>
-                                                                <?php echo number_format($car[$i]['price'], 0, '', ' ');; ?>
-                                                            </td>                                                  
+                                                                <?php echo number_format($car[$i]['price'], 0, '', ' ');; ?> р.
+                                                            </td> 
+                                                            <td>
+                                                                <?php echo number_format($car[$i]['old_price'], 0, '', ' ');; ?> р.
+                                                            </td>                                                                                                               
                                                         </tr> 
                                                         <?php $currentId = $car[$i]['modification_id']; ?>
                                                     <?php } else { ?>                                                        
@@ -71,8 +75,11 @@
                                                             <td><?php echo $car[$i]['modification_gearbox'];?></td>
                                                             <td><?php echo $car[$i]['modification_power'];?></td>
                                                             <td>
-                                                                <?php echo number_format($car[$i]['price'], 0, '', ' ');; ?>
-                                                            </td>                                                     
+                                                                <?php echo number_format($car[$i]['price'], 0, '', ' ');; ?> р.
+                                                            </td>  
+                                                            <td>
+                                                                <?php echo number_format($car[$i]['old_price'], 0, '', ' ');; ?> р.
+                                                            </td>                                                                                                               
                                                         </tr> 
                                                     <?php } ?>
 
