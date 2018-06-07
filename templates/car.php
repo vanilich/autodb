@@ -60,7 +60,9 @@
                                                             <td><?php echo $car[$i]['complectation_name'];?></td>
                                                             <td><?php echo $car[$i]['modification_gearbox'];?></td>
                                                             <td><?php echo $car[$i]['modification_power'];?></td>
-                                                            <td></td>                                                  
+                                                            <td>
+                                                                <?php echo number_format($car[$i]['price'], 0, '', ' ');; ?>
+                                                            </td>                                                  
                                                         </tr> 
                                                         <?php $currentId = $car[$i]['modification_id']; ?>
                                                     <?php } else { ?>                                                        
@@ -68,7 +70,9 @@
                                                             <td><?php echo $car[$i]['complectation_name'];?></td>
                                                             <td><?php echo $car[$i]['modification_gearbox'];?></td>
                                                             <td><?php echo $car[$i]['modification_power'];?></td>
-                                                            <td></td>                                                   
+                                                            <td>
+                                                                <?php echo number_format($car[$i]['price'], 0, '', ' ');; ?>
+                                                            </td>                                                     
                                                         </tr> 
                                                     <?php } ?>
 
@@ -108,7 +112,7 @@
                                         <tr>
                                             <th>ID</th>
                                             <th>Название</th>
-                                            <th>Действия</th>
+                                            <th style="width: 100px;">Действия</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -161,7 +165,7 @@
                                         <tr>
                                             <th>ID</th>
                                             <th>Название</th>
-                                            <th>Действия</th>
+                                            <th style="width: 100px;">Действия</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -480,25 +484,36 @@
                             <tr>
                                 <td></td>
                                 <?php foreach ($modification as $item) { ?>
-                                    <td><?php echo $item['name']; ?></td>
+                                    <td class="text-center"><?php echo $item['name']; ?></td>
                                 <?php } ?>
                             </tr>
                             <?php foreach ($complectation as $complectation_item) { ?>
                                 <tr>
                                     <td><?php echo $complectation_item['name']; ?></td>
                                     <?php foreach ($modification as $modification_item) { ?>
-                                        <td>
+                                        <td class="text-center">
                                             <?php $search = search($complectation_has_modification, $modification_item['id'], $complectation_item['id']); ?>
 
-                                            <input 
-                                                class="js-change-complectation_has_modification"
-                                                type="checkbox" 
-                                                <?php if($search) { ?>
-                                                    checked 
-                                                <?php } ?>
-                                                data-complectation-id="<?php echo $complectation_item['id']; ?>"
-                                                data-modification-id="<?php echo $modification_item['id']; ?>"
-                                            >
+                                            <div class="js-change-modification">
+                                                <input 
+                                                    class="js-change-complectation_has_modification"
+                                                    type="checkbox" 
+                                                    <?php if($search) { ?>
+                                                        checked 
+                                                    <?php } ?>
+                                                    data-complectation-id="<?php echo $complectation_item['id']; ?>"
+                                                    data-modification-id="<?php echo $modification_item['id']; ?>"
+                                                >
+
+                                                <form class="form-inline">
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" id="exampleInputName2" placeholder="Цена">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Старая цена">
+                                                    </div>
+                                                </form> 
+                                            </div>                                           
                                         </td>
                                     <?php } ?>
                                 </tr>  
