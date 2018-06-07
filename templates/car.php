@@ -401,6 +401,7 @@
 
                 console.log(id);
 
+                // 
                 $.ajax({
                     method: 'POST',
                     url: '/getParameter/' + id,
@@ -426,57 +427,33 @@
         </script>   
 
         <script type="text/javascript">
-            $(document).ready(function() {
-                $('.js-example-basic-multiple').select2();
-
-                $('.js-example-basic-multiple').select2({
-                    ajax: {
-                        url: '/parameter/search',
-                        data: function (params) {
-                            var query = {
-                                search: params.term
-                            }
-                            return query;
-                        },
-                        processResults: function (data) {
-                            console.log(data);
-
-                            return {
-                                results: $.map(data, function (item) {
-                                    return {
-                                        text: item.name,
-                                        id: item.id
-                                    }
-                                })
-                            };
-                        }
-                    }
-                });
-            });
-        </script>   
-
-        <script type="text/javascript">
             window.search_container = $('.search-container');
 
+            // При нажатии клавиши в форме поиска
             $('.js-search').keyup(function() {
                 var val = $(this).val();
 
+                // Если в поле ничего нет, очищаем контейнер
                 if(val == "") {
                     $(window.search_container).hide();
                     return;
                 }
 
+                // Делаем запрос к серверу на поиск параметра
                 $.ajax({
                     method: 'GET',
                     url: '/parameter/search',
                     data: {
+                        // Передаем строку для поиска
                         search : val
                     },
 
                     success: function(data) {
+                        // Очищаем контейнер
                         $(window.search_container).html('');
 
                         for(var key in data) {
+                            // Добавляем li элементы резльутатов поиска
                             var li = $('<li>').attr('data-name', data[key].name).attr('data-id', data[key].id).text(data[key].name);
 
                             $(window.search_container).append(li);
@@ -509,17 +486,10 @@
                 $('.js-search').val('');
             });
 
-            // Удаление параметры их таблицы
+            // Удаление параметры из таблицы
             $(document).on('click', '.js-remove-parametr', function() {
                 $(this).parents('tr').remove();
             });
         </script> 
-
-        <style type="text/css">
-            .select2-container {
-                width: 100% !important;
-                display: block;
-            }
-        </style>
     </body>
 </html>

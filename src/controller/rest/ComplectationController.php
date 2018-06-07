@@ -53,6 +53,55 @@
 				$model_id = intval($body['model_id']);
 				$name = $body['name'];
 
+				// Список параметров из базы данных
+				$complectation_has_parameter = $this->container->db->getAll('SELECT * FROM complectation_has_parameter WHERE complectation_id = ?i', $id);
+
+				if( isset($body['parameter']) AND !empty($body['parameter']) ) {
+					// Получаем список параметров от пользователя
+					$parameterFromUser = array_unique($body['parameter']);
+
+					// Преобразуем список параметров из базы данных в одномерный массив
+					$parameterFromDB = [];
+					foreach ($complectation_has_parameter as $value) {
+						$parameterFromDB[] = $value['parameter_id'];
+					}
+
+					// Проходимся по параметрам, которые пришли от пользователя
+					foreach ($parameterFromUser as $parameterKeyUser => $parameter) {
+						if( ($parameterKeyDB = array_search($parameter, $parameterFromDB)) !== false ) {
+							// Если параметр найден в базе данных
+							// То удаляем его из массива, что-бы потом найти лишние элементы
+							unset($parameterFromUser[$parameterKeyUser]);
+							unset($parameterFromDB[$parameterKeyDB]);
+						}
+					}
+
+					// Массив с ID комплектация для удаления и создания
+					$dataToInsert = $parameterFromUser;
+					$dataToDelete = $parameterFromDB;
+
+					if( is_array($dataToDelete) AND !empty($dataToDelete) ) {
+						$this->container->db->query('DELETE FROM complectation_has_parameter WHERE complectation_id = ?i AND parameter_id IN (?a)', $id, $dataToDelete);
+					}
+
+					if( is_array($dataToInsert) AND !empty($dataToInsert) ) {
+						$rows = [];
+						// Проходимся по массиву с id комплектаций и генерируем строку для запроса
+						foreach ($dataToInsert as $row) {
+						    $rows[] = $this->container->db->parse("(?i, ?i)", $id, $row);
+						}
+						// Переводим массив в строку
+						$queryInsertPart = implode(",", $rows);
+
+						$this->container->db->query('INSERT INTO complectation_has_parameter(complectation_id, parameter_id) VALUES ?p', $queryInsertPart);
+					}					
+				} else {
+					// Если параметры не пришли от пользователя и они есть в бд, соответсвенно их нужно все удалить
+					if( !empty($complectation_has_parameter) ) {
+						$this->container->db->query('DELETE FROM complectation_has_parameter WHERE complectation_id = ?i', $id);
+					}
+				}
+
 				if( $this->container->db->query('UPDATE complectation SET name=?s WHERE id=?i', $name, $id) ) {
 					$this->container->flash->addMessage('success', 'Комплектация автомобиля была успешно обновлена');
 
