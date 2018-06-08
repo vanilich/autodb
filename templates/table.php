@@ -16,7 +16,7 @@
             <tr>
                 <th style="width: 90px;"></th>
                 <th style="width: 90px;">ID</th>
-                <th>Марка</th>
+                <th style="width: 250px;">Марка</th>
                 <th>Модель</th>
             </tr>
         </thead>
@@ -106,7 +106,7 @@
                     <h4 class="modal-title">Редактирование автомобиля</h4>
                 </div>
                 <div class="modal-body">
-                    <input type="hidden" name="id" value="">
+                    <input type="hidden" name="model_id" value="">
 
                     <div class="form-group">
                         <label>Название марки автомобиля</label>
@@ -134,17 +134,18 @@
                                 <th style="width: 150px;">Название цвета</th>
                                 <th style="width: 150px;">Код цвета</th>
                                 <th>Изображения автомобиля</th>
+                                <th style="width: 90px;">Действия</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <th>
-                                    <input type="text" name="color_name[]" class="form-control" required>
+                                    <input type="text" name="color_name" class="form-control" required>
                                 </th>
                                 <th>
                                     <div class="input-group">
                                         <span class="input-group-addon" id="basic-addon2">#</span>
-                                        <input type="color" name="color_value[]" class="form-control" value="#ffffff" required>
+                                        <input type="color" name="color_value" class="form-control" value="#ffffff" required>
                                     </div>
                                 </th>  
                                 <th>
@@ -158,7 +159,12 @@
                                             <input class="car-picture-upload" type="file" name="pictures[]"  multiple>
                                         </div>
                                     </div>
-                                </th>                              
+                                </th>  
+                                <th>
+                                    <a href="#" class="btn btn-danger btn-sm" onclick="return confirm('Вы действительно хотите удалить эту марку автомобиля?')">
+                                        <i class="fa fa-trash" aria-hidden="true"></i> 
+                                    </a>                                   
+                                </th>                            
                             </tr>
                         </tbody>
                     </table>  
@@ -195,7 +201,12 @@
                         <input class="car-picture-upload" type="file" name="pictures[]"  multiple>
                     </div>
                 </div>
-            </th>                              
+            </th>
+            <th>
+                <a href="#" class="btn btn-danger btn-sm" onclick="return confirm('Вы действительно хотите удалить эту марку автомобиля?')">
+                    <i class="fa fa-trash" aria-hidden="true"></i> 
+                </a>                                   
+            </th>                                           
         </tr>
     </script> 
 
@@ -204,7 +215,7 @@
             var button = $(event.relatedTarget);
             var data = button.data('data');
 
-            $(this).find('[name="id"]').val( $(button).attr('data-id') );
+            $(this).find('[name="model_id"]').val( $(button).attr('data-id') );
             $(this).find('[name="mark"]').val( $(button).attr('data-mark') );
             $(this).find('[name="model"]').val( $(button).attr('data-model') );
 
@@ -212,12 +223,46 @@
 
         // Сохранение изменений
         $('.js-save-car').on('click', function() {
+            // todo validation
 
-            $('#modal-car-edit input[name="color_name[]"]').each(function() {
-                if( $(this).val() == '' ) {
-                    $(this).focus();
-                    return false;
-                }
+
+            $('.js-color-table tbody tr').each(function() {
+                var self = this;
+
+                var colorName = $(this).find('input[name="color_name"]').val(); 
+                var colorValue = $(this).find('input[name="color_value"]').val(); 
+
+
+                var $input = $('.js-color-table tbody tr').find('.car-picture-upload');
+                var formData = new FormData; 
+
+                for( var key in $input.prop('files') ) {
+                    formData.append('pictures[]', $input.prop('files')[key]);
+                }     
+
+                formData.append('color_name', colorName);      
+                formData.append('color_value', colorValue);      
+                formData.append('model_id', $('#modal-car-edit').find('[name="model_id"]').val() ) ;   
+
+                var id = $('#modal-car-edit').find('[name="id"]').val();
+
+                if(id !== undefined) {
+                   formData.append('id', id) ;      
+                }   
+                
+                $.ajax({
+                    method: 'POST',
+                    url: '/car/edit',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+
+                    success: function (data) {
+                        if(data.id) {
+                            $(self).append( $('<input>').attr('type', 'hidden').val(data.id).attr('name', 'id') );
+                        }
+                    }
+                }); 
             });
         });
 

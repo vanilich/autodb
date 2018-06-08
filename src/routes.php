@@ -48,4 +48,4 @@
 	$app->post('/parameter_category/add',      	 \ParameterCategoryController::class . ':add');
 	$app->any('/parameter_category/remove/{id}', \ParameterCategoryController::class . ':remove');
 
-	$app->post('/car/picture/upload', \CarController::class . ':pictureUpload');
+	$app->post('/car/edit', \CarController::class . ':edit');
