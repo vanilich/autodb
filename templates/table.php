@@ -28,11 +28,8 @@
                             <i class="fa fa-check" aria-hidden="true"></i> 
                         </a>
                         <button data-toggle="modal" 
-                            data-target="#modal-car-edit" 
+                            data-target="#modal-car-edit<?php echo $item['id']; ?>" 
                             class="btn btn-primary btn-sm" 
-                            data-id="<?php echo $item['id'];?>"
-                            data-mark="<?php echo $item['mark_name'];?>"
-                            data-model="<?php echo $item['name'];?>"
                         >
                             <i class="fa fa-pencil" aria-hidden="true"></i>
                         </button>                        
@@ -98,96 +95,113 @@
         $('[data-toggle="tooltip"]').tooltip();
     </script>
 
-    <div class="modal fade" id="modal-car-edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">Редактирование автомобиля</h4>
-                </div>
-                <div class="modal-body">
-                    <input type="hidden" name="model_id" value="">
-
-                    <div class="form-group">
-                        <label>Название марки автомобиля</label>
-                        <input type="text" name="mark" class="form-control" disabled>
+    <?php foreach($data as $item) { ?> 
+        <div class="modal fade modal-car-edit" id="modal-car-edit<?php echo $item['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Редактирование автомобиля</h4>
                     </div>
+                    <div class="modal-body">
+                        <input type="hidden" name="model_id" value="<?php echo $item['id'];?>">
 
-                    <div class="form-group">
-                        <label>Название модели автомобиля</label>
-                        <input type="text" name="model" class="form-control" disabled>
+                        <div class="form-group">
+                            <label>Название марки автомобиля</label>
+                            <input type="text" name="mark" class="form-control" disabled value="<?php echo $item['mark_name'];?>">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Название модели автомобиля</label>
+                            <input type="text" name="model" class="form-control" disabled value="<?php echo $item['name'];?>">
+                        </div>
+
+                        <hr/>
+
+                        <button type="submit" class="btn btn-default" id="js-add-price">
+                            <i class="fa fa-plus" aria-hidden="true"></i>
+                            Добавить цвет
+                        </button>
+
+                        <br/>
+                        <br/>
+
+                        <table class="table table-bordered js-color-table">
+                            <thead>
+                                <tr>
+                                    <th style="width: 150px;">Название цвета</th>
+                                    <th style="width: 150px;">Код цвета</th>
+                                    <th>Изображения автомобиля</th>
+                                    <th style="width: 90px;">Действия</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($color as $value) { ?>
+                                    <?php if( $value['model_id'] === $item['id'] ) { ?>
+                                        <tr>
+                                            <th>
+                                                <input type="text" name="color_name" class="form-control" required value="<?php echo $value['name']; ?>">
+                                            </th>
+                                            <th>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon" id="basic-addon2">#</span>
+                                                    <input type="color" name="color_value" class="form-control" value="<?php echo $value['hex']; ?>" required>
+                                                </div>
+                                            </th>  
+                                            <th>
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <div class="image-item-row">
+                                                            <?php if( !empty($value['pictures']) ) { ?>
+                                                                <?php $pictures = json_decode($value['pictures']); ?>
+
+                                                                <?php foreach ($pictures as $pic) { ?>
+                                                                    <div class="image-item">
+                                                                        <a class="thumbnail image-th-car" style="background-image: url(' <?php echo 'res/' . getImageFolderName($pic) . $pic; ?>');"></a>
+                                                                    </div>
+                                                                <?php } ?>
+                                                            <?php } ?>
+                                                        </div> 
+                                                    </div> 
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <input class="car-picture-upload" type="file" name="pictures[]"  multiple>
+                                                    </div>
+                                                </div>
+                                            </th>  
+                                            <th>
+                                                <a href="#" class="btn btn-danger btn-sm" onclick="return confirm('Вы действительно хотите удалить эту марку автомобиля?')">
+                                                    <i class="fa fa-trash" aria-hidden="true"></i> 
+                                                </a>                                   
+                                            </th> 
+                                            <input type="hidden" value="<?php echo $value['id']; ?>" name="color_id">
+                                        </tr>
+                                    <?php } ?>
+                                <?php } ?>                           
+                            </tbody>
+                        </table>  
+
+                        <hr/>
+
+                        <button type="submit" class="btn btn-success js-save-car">
+                            <i class="fa fa-floppy-o" aria-hidden="true"></i> Сохранить
+                        </button>             
                     </div>
-
-                    <hr/>
-
-                    <button type="submit" class="btn btn-default" id="js-add-price">
-                        <i class="fa fa-plus" aria-hidden="true"></i>
-                        Добавить цвет
-                    </button>
-
-                    <br/>
-                    <br/>
-
-                    <table class="table table-bordered js-color-table">
-                        <thead>
-                            <tr>
-                                <th style="width: 150px;">Название цвета</th>
-                                <th style="width: 150px;">Код цвета</th>
-                                <th>Изображения автомобиля</th>
-                                <th style="width: 90px;">Действия</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th>
-                                    <input type="text" name="color_name" class="form-control" required>
-                                </th>
-                                <th>
-                                    <div class="input-group">
-                                        <span class="input-group-addon" id="basic-addon2">#</span>
-                                        <input type="color" name="color_value" class="form-control" value="#ffffff" required>
-                                    </div>
-                                </th>  
-                                <th>
-                                    <div class="row">
-                                        <div class="col-lg-12">
-                                            <div class="image-item-row"></div> 
-                                        </div> 
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-12">
-                                            <input class="car-picture-upload" type="file" name="pictures[]"  multiple>
-                                        </div>
-                                    </div>
-                                </th>  
-                                <th>
-                                    <a href="#" class="btn btn-danger btn-sm" onclick="return confirm('Вы действительно хотите удалить эту марку автомобиля?')">
-                                        <i class="fa fa-trash" aria-hidden="true"></i> 
-                                    </a>                                   
-                                </th>                            
-                            </tr>
-                        </tbody>
-                    </table>  
-
-                    <hr/>
-
-                    <button type="submit" class="btn btn-success js-save-car">
-                        <i class="fa fa-floppy-o" aria-hidden="true"></i> Сохранить
-                    </button>             
                 </div>
             </div>
-        </div>
-    </div> 
+        </div> 
+    <?php } ?>
 
     <script type="text-template" id="table-row-tempalte">
         <tr>
             <th>
-                <input type="text" name="color_name[]" class="form-control" required>
+                <input type="text" name="color_name" class="form-control" required>
             </th>
             <th>
                 <div class="input-group">
                     <span class="input-group-addon" id="basic-addon2">#</span>
-                    <input type="color" name="color_value[]" class="form-control" value="#ffffff" required>
+                    <input type="color" name="color_value" class="form-control" value="#ffffff" required>
                 </div>
             </th>  
             <th>
@@ -211,45 +225,39 @@
     </script> 
 
     <script type="text/javascript">
-        $(document).on('show.bs.modal', '#modal-car-edit', function (event) {
-            var button = $(event.relatedTarget);
-            var data = button.data('data');
-
-            $(this).find('[name="model_id"]').val( $(button).attr('data-id') );
-            $(this).find('[name="mark"]').val( $(button).attr('data-mark') );
-            $(this).find('[name="model"]').val( $(button).attr('data-model') );
-
-        });
-
         // Сохранение изменений
         $('.js-save-car').on('click', function() {
             // todo validation
 
 
-            $('.js-color-table tbody tr').each(function() {
+            // Проходимся по всем цветам
+            $(this).parents('.modal-car-edit').find('.js-color-table tbody tr').each(function() {
                 var self = this;
 
+                // Получаем имя цвета и hex код
                 var colorName = $(this).find('input[name="color_name"]').val(); 
                 var colorValue = $(this).find('input[name="color_value"]').val(); 
 
-
-                var $input = $('.js-color-table tbody tr').find('.car-picture-upload');
+                // Экземпляр формы загрузки файла
+                var $input = $(this).find('.car-picture-upload');
                 var formData = new FormData; 
 
+                // Получаем данные картинок
                 for( var key in $input.prop('files') ) {
                     formData.append('pictures[]', $input.prop('files')[key]);
                 }     
 
+                // Добавляем в запрос необходимую информацию
                 formData.append('color_name', colorName);      
                 formData.append('color_value', colorValue);      
-                formData.append('model_id', $('#modal-car-edit').find('[name="model_id"]').val() ) ;   
+                formData.append('model_id', $(this).parents('.modal-car-edit').find('[name="model_id"]').val() ) ;   
 
-                var id = $('#modal-car-edit').find('[name="id"]').val();
-
+                var id = $(this).find('input[name="color_id"]').val();
                 if(id !== undefined) {
                    formData.append('id', id) ;      
                 }   
                 
+                // Отправляем на сервер
                 $.ajax({
                     method: 'POST',
                     url: '/car/edit',
@@ -258,8 +266,9 @@
                     contentType: false,
 
                     success: function (data) {
+                        // Если с сервера приходит ID, то значит вставлена новая запись
                         if(data.id) {
-                            $(self).append( $('<input>').attr('type', 'hidden').val(data.id).attr('name', 'id') );
+                            $(self).append( $('<input>').attr('type', 'hidden').val(data.id).attr('name', 'color_id') );
                         }
                     }
                 }); 
@@ -273,32 +282,10 @@
 
         // При изменении картинки, отображаем их в браузере
         $(document).on("change", '.car-picture-upload', function() {
-            readURL(this);
-
-            /*
-            var self = this;
-
-            var $input = $(this);
-            var formData = new FormData; 
-
-            for( var key in $input.prop('files') ) {
-                formData.append('pictures[]', $input.prop('files')[key]);
-            }           
-            
-            $.ajax({
-                url: '/car/picture/upload',
-                data: formData,
-                processData: false,
-                contentType: false,
-                type: 'POST',
-
-                success: function (data) {
-                    readURL(self);
-                }
-            });  
-            */                                
+            readURL(this);                                
         });        
 
+        // Функция, которая выводит картинки в браузере
         function readURL(input) {
             if (input.files && input.files[0]) {
                 for(var key in input.files) {

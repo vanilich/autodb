@@ -31,10 +31,18 @@
 
 			$countPages = intval($countRows / 5) + 1;
 
+			$model_ids = [];
+			foreach ($data as $value) {
+				$model_ids[] = $value['id'];
+			}
+
+			$color = $this->container->db->getAll('SELECT * FROM colors WHERE model_id IN(?a)', $model_ids);
+
 		    return $this->container->renderer->render($response, 'table.php', [
 		    	'data' => $data,
 		    	'currentPage' => $page,
-		    	'countPages'  => $countPages
+		    	'countPages'  => $countPages,
+		    	'color' => $color
 		    ]);	
 		}			
 	}
