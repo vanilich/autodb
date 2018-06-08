@@ -8,6 +8,18 @@
 		    return $this->container->renderer->render($response, 'index.php');			
 		}
 
+		public function test(Request $request, Response $response, array $args) {
+		    return $this->container->renderer->render($response, 'test.php');			
+		}
+
+		public function testPost(Request $request, Response $response, array $args) {
+		    print_r($_FILES);
+
+		    $a = move_uploaded_file($_FILES['picture']['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . '/res/rwe.jpg');
+
+		    var_dump($a);			
+		}
+
 		public function cars(Request $request, Response $response, array $args) {
 			$data = $this->container->db->getAll("SELECT model.id as 'id', model.name as 'name', mark.name as 'mark_name' FROM model INNER JOIN mark ON model.mark_id = mark.id");
 

@@ -8,6 +8,9 @@
 	$app->get('/mark',  	 \FrontendController::class . ':mark');
 	$app->get('/parameter',  \FrontendController::class . ':parameter');
 
+	$app->get('/test',  \FrontendController::class . ':test');
+	$app->post('/test',  \FrontendController::class . ':testPost');
+
 	// Информация о автомобиле (комплектации и т.д.)
 	$app->get('/car/{id}',  \FrontendController::class . ':car');
 
