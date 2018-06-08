@@ -209,8 +209,8 @@
                             </div>
 
                             <div class="form-group">
-                                <label>Название параметра</label>
-                                <input type="text" name="name" class="form-control" required>
+                                <label>Название параметров <small>(С новой строки начинается новый параметр)</small></label>
+                                <textarea type="text" name="name" class="form-control" style="min-height: 150px;" required></textarea>
                             </div>
 
                             <button type="submit" class="btn btn-primary">Добавить</button>

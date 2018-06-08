@@ -22,9 +22,17 @@
 
 			if( isset($body['parameter_category_id']) AND !empty($body['parameter_category_id']) AND isset($body['name']) AND !empty($body['name']) ) {
 				$parameter_category_id = intval($body['parameter_category_id']);
-				$name = $body['name'];
+				$data = explode("\r\n", $body['name']);
 
-				if( $this->container->db->query('INSERT INTO parameter(parameter_category_id, name) VALUES(?i, ?s)', $parameter_category_id, $name) ) {
+
+				$query = "";
+				foreach ($data as $key => $value) {
+					$query .= $this->container->db->parse("(?i, ?s), ", $parameter_category_id, $value);
+				}
+
+				$query = substr ($query, 0, -2);
+
+				if( $this->container->db->query('INSERT INTO parameter(parameter_category_id, name) VALUES ?p', $query) ) {
 					$this->container->flash->addMessage('success', 'Параметр был успешно добавлен');
 
 					return $response->withRedirect('/parameter');
