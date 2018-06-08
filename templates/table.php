@@ -15,7 +15,7 @@
         <thead>
             <tr>
                 <th style="width: 90px;"></th>
-                <th>ID</th>
+                <th style="width: 90px;">ID</th>
                 <th>Марка</th>
                 <th>Модель</th>
             </tr>
@@ -27,8 +27,13 @@
                         <a href="/car/<?php echo $item['id']; ?>" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="bottom" title="Редактировать комплектации">
                             <i class="fa fa-check" aria-hidden="true"></i> 
                         </a>
-                        <a href="/car/<?php echo $item['id']; ?>" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="bottom" title="Цвет автомобиля">
-                            <i class="fa fa-picture-o" aria-hidden="true"></i>
+                        <a  data-toggle="modal" 
+                            data-target="#modal-car-edit" 
+                            class="btn btn-primary btn-sm" 
+                            data-mark="<?php echo $item['mark_name'];?>"
+                            data-model="<?php echo $item['name'];?>"
+                        >
+                            <i class="fa fa-pencil" aria-hidden="true"></i>
                         </a>                        
                     </td>
                     <td><?php echo $item['id'];?></td>
@@ -91,4 +96,41 @@
     <script type="text/javascript">
         $('[data-toggle="tooltip"]').tooltip();
     </script>
+
+    <div class="modal fade" id="modal-car-edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Добавление модели автомобиля</h4>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="/model/add" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label>Название марки автомобиля</label>
+                            <input type="text" name="mark" class="form-control" required disabled>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Название модели автомобиля</label>
+                            <input type="text" name="model" class="form-control" required disabled>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Добавить</button>
+                    </form>                
+                </div>
+            </div>
+        </div>
+    </div> 
+
+    <script type="text/javascript">
+        $('#modal-car-edit').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            var data = button.data('data');
+
+            for(var key in data) {
+                $(this).find('[name="' + key + '"]').val(data[key]);
+            }
+        });
+    </script>        
 <?php } ?>

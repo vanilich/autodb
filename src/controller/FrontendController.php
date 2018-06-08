@@ -13,9 +13,14 @@
 		}
 
 		public function testPost(Request $request, Response $response, array $args) {
-		    print_r($_FILES);
+			ini_set('upload_tmp_dir', '/var/www/auto/tmp');
+			//phpinfo();
 
-		    $a = move_uploaded_file($_FILES['picture']['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . '/res/rwe.jpg');
+		   // print_r($_FILES);
+
+			$path = $_SERVER['DOCUMENT_ROOT'] . '/../res';
+
+		    $a = move_uploaded_file($_FILES['picture']['tmp_name'], $path . '/rwe.jpg');
 
 		    var_dump($a);			
 		}

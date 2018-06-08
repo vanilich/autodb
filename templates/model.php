@@ -40,7 +40,7 @@
                                 <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
                                     <thead>
                                         <tr>
-                                            <th>ID</th>
+                                            <th style="width: 90px;">ID</th>
                                             <th>Марка автомобиля</th>
                                             <th>Название</th>
                                             <th style="width: 100px;">Действия</th>
