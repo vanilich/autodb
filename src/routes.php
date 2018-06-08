@@ -47,3 +47,5 @@
 	$app->post('/parameter_category/edit',     	 \ParameterCategoryController::class . ':edit');
 	$app->post('/parameter_category/add',      	 \ParameterCategoryController::class . ':add');
 	$app->any('/parameter_category/remove/{id}', \ParameterCategoryController::class . ':remove');
+
+	$app->post('/car/picture/upload', \CarController::class . ':pictureUpload');

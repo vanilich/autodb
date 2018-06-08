@@ -8,8 +8,15 @@
 <script src="../vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
 <script src="../vendor/datatables-responsive/dataTables.responsive.js"></script>
 
+
+<script src="../vendor/jquery-file-upload/jquery.ui.widget.js"></script>
+<script src="../vendor/jquery-file-upload/jquery.fileupload.js"></script>
+<script src="../vendor/jquery-file-upload/jquery.fileupload-ui.js"></script>
+<script src="../vendor/jquery-file-upload/jquery.fileupload-process.js"></script>
+<script src="../vendor/jquery-file-upload/jquery.fileupload-image.js"></script>
+<script src="../vendor/jquery-file-upload/jquery.fileupload-audio.js"></script>
+<script src="../vendor/jquery-file-upload/jquery.fileupload-video.js"></script>
+<script src="../vendor/jquery-file-upload/jquery.fileupload-validate.js"></script>
+
 <script src="../dist/js/sb-admin-2.js"></script>
 <script src="../dist/js/main.js"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
-

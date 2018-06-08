@@ -6,22 +6,16 @@
 
 <title>SB Admin 2 - Bootstrap Admin Theme</title>
 
-<!-- Bootstrap Core CSS -->
 <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-<!-- MetisMenu CSS -->
 <link href="../vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
-
-<!-- Custom CSS -->
-<link href="../dist/css/sb-admin-2.css" rel="stylesheet">
-
-<!-- Morris Charts CSS -->
 <link href="../vendor/morrisjs/morris.css" rel="stylesheet">
-
-<!-- Custom Fonts -->
 <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
-<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+<link href="../vendor/jquery-file-upload/jquery.fileupload.css" rel="stylesheet">
+<link href="../vendor/jquery-file-upload/jquery.fileupload-ui.css" rel="stylesheet">
+
+
+<link href="../dist/css/sb-admin-2.css" rel="stylesheet">
 
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
